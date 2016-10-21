@@ -10,6 +10,6 @@ So commits and pushes dont get ugly:
  way when you pull it wont be a nightmare if someone else made changes to their files.
 
 -when you are ready to push simply overwrite your files in the repo directory, AFTER PULLING AND CHECKING GIT
- STATUS, then add -A, commit, and push
+ STATUS, then add -A, commit -m "message text", and push
 
 Have a nice day and good luck on some jolly cooperation!
