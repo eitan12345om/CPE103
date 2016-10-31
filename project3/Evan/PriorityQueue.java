@@ -9,7 +9,7 @@
 
 import java.util.*;
 
-public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQueue<T>
+public class PriorityQueue<T extends Comparable<? super T>> //implements SimpleQueue<T>
 {
 
       //"..must have exactly two private fields!"
@@ -49,44 +49,69 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
       public T dequeue()
       {
          
+         return heap.get(heap.size()-1);
       }
 
       public void enqueue(T element)
       {
+      int index = heap.size();
+      heap.add(null);
+      boolean exit = false;
          if(isMax)
          {
-            if(heap.size() == 1)//1 with the null element
+            while(!exit && index != 1)
             {
-               heap.add(element);              
-            }
-            else
-            {
-               
+               if(element.compareTo(heap.get(index / 2)) > 0)
+               {
+                  heap.set(index, heap.get(index / 2));
+                  index /= 2;
+               }
+               else
+               {
+                  exit = true;
+               }
             }
          }
          else
          {
-
+            while(!exit && index != 1)
+            {
+               if(element.compareTo(heap.get(index/2)) < 0)
+               {
+                  heap.set(index, heap.get(index / 2));
+                  index /= 2;
+               }
+               else
+               {
+                  exit = true;
+               }
+            }
+            
          }
-      }
-
-      public static <E extends Comparable<? super E>> E kth(E[] arr, int size, int k)//With E being generic
-      {
-
+         heap.add(index, element);
       }
 
       public T peek()
       {
-
+         if(heap.size() == 1)
+         {
+            throw new NoSuchElementException();
+         }
+         return heap.get(1);
       }
 
       public int size()
       {
-
+         return heap.size() - 1;
       }
 
-      public static <E extends Comparable<? super E>> E kth(E[] arr, int size)
+      public static <E extends Comparable<? super E>> E kth(E[] arr, int size, int k)//With E being generic
       {
+         return arr[arr.length-1];
+      }
 
+      public static <E extends Comparable<? super E>> void sort(E[] arr, int size)
+      {
+      
       }  
 }
