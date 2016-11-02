@@ -114,24 +114,31 @@ public class BST<T extends Comparable<? super T>> {
    private class EmptyNode implements BSTNode<T> {
       // No instance variables needed or allowed!
 
-      public BSTNode<T> insert(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      //insert an element with a specific key (while maintining BST structure)
+      public BSTNode<T> insert(T element) 
+      {
+         size++;
+         return new Node(element);
       }
 
-      public boolean contains(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public boolean contains(T element) 
+      {
+         return false;
       }
 
-      public T minimum(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public T minimum(T element) 
+      {
+         return element;
       }
 
-      public T maximum(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public T maximum(T element) 
+      {
+         return element;
       }
 
-      public void toSortedList(List<T> list) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public void toSortedList(List<T> list) 
+      {
+         return;
       }
    }
 
@@ -145,25 +152,60 @@ public class BST<T extends Comparable<? super T>> {
       BSTNode<T> left, right;
 
       // You may (and probably want to) write constructor(s)
-
-      public BSTNode<T> insert(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public Node(T element)
+      {
+         this.element = element;
+         this.left = EMPTY_NODE;
+         this.right = EMPTY_NODE;
       }
 
-      public boolean contains(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public BSTNode<T> insert(T element) 
+      {
+         int comp = this.element.compareTo(element);
+         if(comp > 0)
+         {
+            left = left.insert(element);
+         }
+         else if(comp < 0)
+         {
+            right = right.insert(element);
+         }
+         return this;
       }
 
-      public T minimum(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public boolean contains(T element) 
+      {
+         int comp = this.element.compareTo(element);
+
+         if(comp == 0)
+         {
+            return true;
+         }
+         else if(comp > 0)
+         {
+            return left.contains(element);
+         }
+         else 
+         {
+            return right.contains(element);
+         }
       }
 
-      public T maximum(T element) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public T minimum(T element) 
+      {
+         return left.minimum(this.element);
       }
 
-      public void toSortedList(List<T> list) {
-         throw new RuntimeException("TODO: You must complete this method!");
+      public T maximum(T element) 
+      {
+         return right.maximum(this.element);        
+      }
+
+      public void toSortedList(List<T> list) 
+      {
+         left.toSortedList(list);
+         list.add(this.element);
+         right.toSortedList(list);
       }
    }
 }
