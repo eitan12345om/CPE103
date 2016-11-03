@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * JUnit tests for BST.
  *
  * @author Eitan Simler
- * @version Lab08
+ * @version Project4
  */
 
 public class BSTTests {
@@ -692,7 +692,139 @@ public class BSTTests {
       tree.remove(200);
       assertEquals(32, tree.internalPathLength()); 
    }
+  
+   @Test (expected=NoSuchElementException.class)
+   public void testGet1_empty() {
+      BST<Integer> tree = new BST<>();
+      tree.get(4);
+   }
+
+   @Test 
+   public void testGet2_justRoot() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(3);
+      assertEquals(3, (int) tree.get(3));
+   }
+
+   @Test
+   public void testGet3_lopsidedRight() {
+      BST<Integer> tree = new BST<>();
+      for (int i = 0; i < 10; i++) {
+         tree.insert(i);
+      }
+      for (int i = 0; i < 10; i++) {
+         assertEquals(i, (int) tree.get(i));
+      }
+   }
+
+   @Test
+   public void testGet4_lopsidedLeft() {
+      BST<Integer> tree = new BST<>();
+      for (int i = 10; i > 0; i--) {
+         tree.insert(i);
+      }
+      for (int i = 10; i > 0; i--) {
+         assertEquals(i, (int) tree.get(i));
+      }
+   }
+
+   @Test
+   public void testGet5_Normalish() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(7);
+      tree.insert(6);
+      assertEquals(2, (int) tree.get(2));
+   }
    
+   @Test
+   public void testGet6_Normalish() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(7);
+      tree.insert(6);
+      tree.insert(0);
+      assertEquals(7, (int) tree.get(7));
+   }
+
+   @Test (expected=NoSuchElementException.class)
+   public void testGet7_Normalish_withRemove() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(7);
+      tree.insert(6);
+      tree.insert(0);
+      tree.remove(3);
+      tree.get(3);
+   }
+
+   @Test (expected=NoSuchElementException.class)
+   public void testGet8_Normalish_withRemove() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(7);
+      tree.insert(6);
+      tree.insert(8);
+      tree.insert(0);
+      tree.remove(8);
+      tree.get(8);
+   }
+
+   @Test
+   public void testGet9_Normalish() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(100);
+      tree.insert(50);
+      tree.insert(20);
+      tree.insert(40);
+      tree.insert(30);
+      tree.insert(25);
+      tree.insert(45);
+      tree.insert(75);
+      tree.insert(80);
+      tree.insert(200);
+      tree.insert(150);
+      tree.insert(175);
+      tree.insert(300);
+      tree.insert(400);
+      assertEquals(400, (int) tree.get(400));
+      assertEquals(150, (int) tree.get(150));
+      assertEquals(75, (int) tree.get(75));
+   }
+
+   @Test
+   public void testGet10_Normalish_withRemove() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(100);
+      tree.insert(50);
+      tree.insert(20);
+      tree.insert(40);
+      tree.insert(30);
+      tree.insert(25);
+      tree.insert(45);
+      tree.insert(75);
+      tree.insert(80);
+      tree.insert(200);
+      tree.insert(150);
+      tree.insert(175);
+      tree.insert(300);
+      tree.insert(400);
+      tree.remove(200);
+      tree.size(); 
+   }
+
    // Private helper method
    private static <T> boolean listEquals(T[] arr, ArrayList<T> arr2) {
       if (arr.length != arr2.size()) {
