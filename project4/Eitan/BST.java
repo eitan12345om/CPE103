@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.NoSuchElementException;
-
+import java.util.Iterator;
 
 /**
  * Provided BST class skeleton for students to complete. This class makes use
@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
  * Completed By:
  * @author Eitan Simler
  */
-public class BST<T extends Comparable<? super T>> {
+public class BST<T extends Comparable<? super T>> implements Iterable<T> {
    // Instance variables for BST class.
    // These are the only ones allowed!
    private final BSTNode<T> EMPTY_NODE = new EmptyNode();
@@ -150,6 +150,16 @@ public class BST<T extends Comparable<? super T>> {
     */
    public T get(T element) {
       return root.get(element);
+   }
+
+   /**
+    * Creates in-order iterator over BST
+    *
+    * @return iterator over BST
+    */
+   public Iterator<T> iterator() {
+      // TODO: Add method body
+      return null;
    }
 
    ////////////////////////////////////////////////////////////////////////////
@@ -314,6 +324,24 @@ public class BST<T extends Comparable<? super T>> {
          
          return (temp == 0) ? element : ((temp > 0) ?
             left.get(element) : right.get(element));
-      } 
+      }
+   }
+
+   private class BSTIterator<E> implements Iterator<E> {
+      
+      public boolean hasNext() {
+         // TODO: Add method body
+         return false;
+      }
+
+      public E next() {
+         // TODO: Add method body
+         return null;
+      }
+
+      public void remove() {
+         // Method not supported by this iterator
+         throw new UnsupportedOperationException();
+      }
    }
 }
