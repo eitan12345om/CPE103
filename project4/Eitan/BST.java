@@ -313,7 +313,7 @@ public class BST<T extends Comparable<? super T>> {
 	 int temp = this.element.compareTo(element);
          
          return (temp == 0) ? element : ((temp > 0) ?
-            left.contains(element) : right.contains(element));
+            left.get(element) : right.get(element));
       } 
    }
 }
