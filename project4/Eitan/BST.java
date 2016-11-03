@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  *
  * Original Revision:
  * @author Hatalsky/Jones
- * @version Lab08
+ * @version Project4 
  *
  * Completed By:
  * @author Eitan Simler
@@ -30,6 +30,7 @@ public class BST<T extends Comparable<? super T>> {
       public BSTNode<T> remove(T element);
       public int treeHeight();
       public long internalPathLength(long depth);
+      public T get(T element); 
    }
    ////////////////////////////////////////////////////////////////////////////
    // BST class methods...
@@ -142,6 +143,15 @@ public class BST<T extends Comparable<? super T>> {
       return root.internalPathLength(0);
    }
 
+   /**
+    * Finds and returns specified element in tree
+    *
+    * @return the element if it is in the tree
+    */
+   public T get(T element) {
+      return root.get(element);
+   }
+
    ////////////////////////////////////////////////////////////////////////////
    // private EmptyNode class...
    //
@@ -182,6 +192,11 @@ public class BST<T extends Comparable<? super T>> {
 
       public long internalPathLength(long depth) {
          return 0;
+      }
+
+      public T get(T element) {
+         // Element is not in tree so throw exception
+         throw new NoSuchElementException();
       }
    }
 
@@ -282,11 +297,23 @@ public class BST<T extends Comparable<? super T>> {
       }
 
       public int treeHeight() {
+         // Determine whether left or right is larger and return it
          return 1 + Math.max(left.treeHeight(), right.treeHeight());
       }
       
       public long internalPathLength(long depth) {
-         return left.internalPathLength(1 + depth) + depth + right.internalPathLength(1 + depth);
+         // In order traversal of the tree
+         return left.internalPathLength(1 + depth) + depth
+            + right.internalPathLength(1 + depth);
       }
+
+      public T get(T element) {
+         // >= 1 if current node bigger than element; <= -1 if smaller.
+         // 0 if equal
+	 int temp = this.element.compareTo(element);
+         
+         return (temp == 0) ? element : ((temp > 0) ?
+            left.contains(element) : right.contains(element));
+      } 
    }
 }
