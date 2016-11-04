@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 /**
  * JUnit tests for BST.
@@ -824,6 +825,198 @@ public class BSTTests {
       tree.remove(200);
       tree.size(); 
    }
+
+   @Test (expected=UnsupportedOperationException.class)
+   public void testIterator1_Remove() {
+      BST<Integer> tree = new BST<>();
+      Iterator it = tree.iterator();
+      it.remove();
+   }
+   
+   @Test (expected=UnsupportedOperationException.class)
+   public void testIterator2_Remove() {
+      BST<Integer> tree = new BST<>();
+      Iterator it = tree.iterator();
+      tree.insert(50);
+      it.remove();
+   }
+   
+   @Test
+   public void testIterator3_hasNext() {
+      BST<Integer> tree = new BST<>();
+      Iterator it = tree.iterator();
+      assertFalse(it.hasNext());
+   }
+   
+   @Test
+   public void testIterator4_hasNext() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      Iterator it = tree.iterator();
+      assertTrue(it.hasNext());
+   }
+
+   @Test
+   public void testIterator5_hasNext() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      Iterator it = tree.iterator();
+      assertTrue(it.hasNext());
+      it.next();
+      assertFalse(it.hasNext());
+   }
+   
+   @Test (expected=NoSuchElementException.class)
+   public void testIterator6_Next() {
+      BST<Integer> tree = new BST<>();
+      Iterator it = tree.iterator();
+      it.next();
+   }
+   
+   @Test 
+   public void testIterator7_Next() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      Iterator it = tree.iterator();
+      assertEquals(5, it.next());
+   }
+   
+   @Test 
+   public void testIterator8_Next() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(4);
+      Iterator it = tree.iterator();
+      assertEquals(3, it.next());
+      assertEquals(4, it.next());
+      assertEquals(5, it.next());
+   }
+   
+   @Test
+   public void testIterator9_Next_lopsidedRight() {
+      BST<Integer> tree = new BST<>();
+      for (int i = 0; i < 10; i++) {
+         tree.insert(i);
+      }
+      Iterator it = tree.iterator();
+      for (int i = 0; i < 10; i++) {
+         assertEquals(i, it.next());
+      }
+   }
+
+   @Test
+   public void testIterator10_Next_lopsidedLeft() {
+      BST<Integer> tree = new BST<>();
+      for (int i = 10; i > 0; i--) {
+         tree.insert(i);
+      }
+      Iterator it = tree.iterator();
+      for (int i = 1; i < 11; i++) {
+         assertEquals(i, it.next());
+      }
+   }
+
+   @Test
+   public void testIterator11_Next_Normalish() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      tree.insert(3);
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(7);
+      tree.insert(6);
+      tree.insert(4);
+      tree.insert(8);
+      tree.insert(0);
+      Iterator it = tree.iterator();
+      for (int i = 0; i < 9; i++) {
+         assertEquals(i, it.next());
+      }
+   }
+
+   @Test
+   public void testIterator12_Next_Normalish() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(100);
+      tree.insert(50);
+      tree.insert(20);
+      tree.insert(40);
+      tree.insert(30);
+      tree.insert(25);
+      tree.insert(45);
+      tree.insert(75);
+      tree.insert(80);
+      tree.insert(200);
+      tree.insert(150);
+      tree.insert(175);
+      tree.insert(300);
+      tree.insert(400);
+      Iterator it = tree.iterator();
+      assertEquals(20, it.next());
+      assertEquals(25, it.next());
+      assertEquals(30, it.next());
+      assertEquals(40, it.next());
+      assertEquals(45, it.next());
+      assertEquals(50, it.next());
+      assertEquals(75, it.next());
+      assertEquals(80, it.next());
+      assertEquals(100, it.next());
+      assertEquals(150, it.next());
+      assertEquals(175, it.next());
+      assertEquals(200, it.next());
+      assertEquals(300, it.next());
+      assertEquals(400, it.next());
+   }  
+
+   @Test (expected=NoSuchElementException.class)
+   public void testIterator13_Next_TooMany() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(5);
+      Iterator it = tree.iterator();
+      it.next();
+      assertFalse(it.hasNext());
+      it.next();
+   }
+
+   @Test (expected=NoSuchElementException.class)
+   public void testIterator14_Next_TooMany() {
+      BST<Integer> tree = new BST<>();
+      for (int i = 0; i < 10; i++) {
+         tree.insert(i);
+      }
+      Iterator it = tree.iterator();
+      for (int i = 0; i < 10; i++) {
+         it.next();
+      }
+      assertFalse(it.hasNext());
+      it.next();
+   }
+
+   @Test (expected=NoSuchElementException.class)
+   public void testIterator15_Next_TooMany() {
+      BST<Integer> tree = new BST<>();
+      tree.insert(100);
+      tree.insert(50);
+      tree.insert(20);
+      tree.insert(40);
+      tree.insert(30);
+      tree.insert(25);
+      tree.insert(45);
+      tree.insert(75);
+      tree.insert(80);
+      tree.insert(200);
+      tree.insert(150);
+      tree.insert(175);
+      tree.insert(300);
+      tree.insert(400);
+      Iterator it = tree.iterator();
+      for (int i = 0; i < 14; i++) {
+         it.next();
+      }
+      assertFalse(it.hasNext());
+      it.next();
+   }  
 
    // Private helper method
    private static <T> boolean listEquals(T[] arr, ArrayList<T> arr2) {
