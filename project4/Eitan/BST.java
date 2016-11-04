@@ -326,7 +326,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
       }
    }
 
-   private class BSTIterator<E> implements Iterator<E> {
+   private class BSTIterator implements Iterator<T> {
  
       // Instance variables
       private SimpleArrayStack<Node> stack = new SimpleArrayStack<>();
@@ -342,7 +342,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
          return stack.size() > 0;
       }
 
-      public E next() {
+      public T next() {
          // Check if any elements in stack
          if (!hasNext()) {
             throw new NoSuchElementException();
@@ -353,7 +353,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
          addStack(popReturn.right);
 
          // Return next element
-         return popReturn;
+         return popReturn.element;
       }
 
       public void remove() {
@@ -366,8 +366,8 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
          // Traverse right (if possible), then all the way left (if possible)
          BSTNode<T> aNode = node;
          while (aNode.getClass() == Node.class) {
-            stack.push(aNode);
-            aNode = aNode.left;
+            stack.push((Node) aNode);
+            aNode = ((Node) aNode).left;
          }                  
       }
    }
