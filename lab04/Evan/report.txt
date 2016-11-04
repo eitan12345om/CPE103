@@ -1,0 +1,21 @@
+                      each         each        each         each
+    Iterations     O(1) push     O(1) pop    O(N) push    O(N)pop
+    -------------------------------------------------------------
+    10N                981 ns      805 ns      1490 ns      1367 ns
+    100N               978 ns      833 ns      2672 ns      2358 ns
+    1000N              940 ns      867 ns      3713 ns     32894 ns
+    10000N             650 ns      650 ns     28697 ns    322731 ns
+    100000N            450 ns      450 ns    282679 ns   8866593 ns
+    -------------------------------------------------------------
+
+    Clearly the O(1) push and pops are much more efficient since they 
+    dont rely on the size of the array when it comes to processing time
+
+    With the O(N) push and pops they take much longer since they have 
+    to index through the entire array once before they finish which 
+    means they rely on how maany items are in the array.
+
+    With the numbers of iterations the pop and push almost increases 
+    by a factor of 10 because the array becomes so large to go through.
+
+    I didnt really run into any problems while developing the tests.

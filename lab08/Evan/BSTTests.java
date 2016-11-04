@@ -110,6 +110,32 @@ public class BSTTests
       	        assertTrue(arrEquals(new Integer[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, arr));
 	}
 
+        @Test
+        public void test6_treeHeight()
+        {
+                BST<Integer> bst = new BST<>();
+                bst.insert(10);
+                bst.insert(5);
+                bst.insert(0);
+                bst.insert(7);
+                bst.insert(15);
+                bst.insert(12);
+                bst.insert(17);
+                bst.insert(19);
+                assertEquals(8, bst.size());
+                assertEquals(19,(int) bst.maximum());
+                assertEquals(0, (int) bst.minimum());
+                ArrayList<Integer> arr1 = new ArrayList<>();
+                bst.toSortedList(arr1);
+                assertTrue(arrEquals(new Integer[] {0, 5, 7, 10, 12, 15, 17, 19}, arr1));
+                ArrayList<Integer> arr2 = new ArrayList<>();
+                bst.remove(0);
+                bst.toSortedList(arr2);
+                assertTrue(arrEquals(new Integer[] {5, 7, 10, 12, 15, 17, 19}, arr2));
+                assertEquals(3, (int) bst.treeHeight());
+                assertEquals(11, (int) bst.internalPathLength());
+        }
+
 	private static <T> boolean arrEquals(T[] arr1, ArrayList<T> arr2) {
         if (arr1.length != arr2.size()) 
         {

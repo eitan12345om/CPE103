@@ -27,6 +27,9 @@ public class BST<T extends Comparable<? super T>> {
       public T minimum(T minimum);
       public T maximum(T maximum);
       public void toSortedList(List<T> list);
+      public BSTNode<T> remove(T element);
+      public int treeHeight(); 
+      public long internalPathLength(long depth);
    }
 
    ////////////////////////////////////////////////////////////////////////////
@@ -108,6 +111,33 @@ public class BST<T extends Comparable<? super T>> {
       return size;
    }
 
+   /*==========================|My public Methods|===========================*/
+
+
+   public void remove(T element)
+   {
+      root = root.remove(element);
+      size--;
+   }
+
+   //has private helper method
+   public int treeHeight()
+   {
+      return root.treeHeight();
+   }
+
+   public long internalPathLength()
+   {
+      if(root == EMPTY_NODE)
+      {
+         return -1;
+      }
+      return root.internalPathLength(0);
+   }
+
+
+   /*========================================================================*/
+
    ////////////////////////////////////////////////////////////////////////////
    // private EmptyNode class...
    //
@@ -139,6 +169,21 @@ public class BST<T extends Comparable<? super T>> {
       public void toSortedList(List<T> list) 
       {
          return;
+      }
+
+      public BSTNode<T> remove(T element)
+      {
+         throw new NoSuchElementException();
+      }
+
+      public int treeHeight()
+      {
+         return -1; //the empty node shouldn't be included in height
+      }
+
+      public long internalPathLength(long depth)
+      {
+         return 0;
       }
    }
 
@@ -206,6 +251,57 @@ public class BST<T extends Comparable<? super T>> {
          left.toSortedList(list);
          list.add(this.element);
          right.toSortedList(list);
+      }
+
+      public BSTNode<T> remove(T element)
+      {
+         int comp = this.element.compareTo(element);
+         if(comp == 0)
+         {
+            boolean leftNode = left.getClass() == Node.class;
+            boolean rightNode = right.getClass() == Node.class;
+
+            if(!rightNode && !leftNode)
+            {
+               return EMPTY_NODE;
+            }
+            else if(leftNode && !rightNode)
+            {
+               return left;
+            }
+            else if(!leftNode && rightNode)
+            {
+               return right;
+            }
+            else
+            {
+               this.element = right.minimum(((Node)right).element);
+               right = right.remove(this.element);
+               return this;
+            }
+         }
+         else
+         {
+            if(comp > 0)
+            {
+               left = left.remove(element);
+            }
+            else
+            {
+               right = right.remove(element);
+            }
+            return this;
+         }
+      }
+
+      public int treeHeight()
+      {  
+         return 1 + Math.max(left.treeHeight(),right.treeHeight());
+      }
+
+      public long internalPathLength(long depth)
+      {
+         return left.internalPathLength(depth + 1) + depth + right.internalPathLength(depth + 1);
       }
    }
 }
