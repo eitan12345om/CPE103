@@ -8,9 +8,14 @@
 
 public class CharacterOrder extends MorseCode implements Comparable<CharacterOrder> {
 
-   // TODO: Add constructors!
    // Constructors
-   
+   public CharacterOrder(MorseCode other) {
+      super(other);
+   }
+
+   public CharacterOrder(Character character, String code) {
+      super(character, code);
+   }
 
    // Method as required by the interface
    public int compareTo(CharacterOrder other) {
