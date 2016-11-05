@@ -19,6 +19,6 @@ public class MorseOrder extends MorseCode implements Comparable<MorseOrder> {
 
    // Method as required by the interface
    public int compareTo(MorseOrder other) {
-      this.getCode().compareTo(other.getCode());
+      return this.getCode().compareTo(other.getCode());
    }
 }

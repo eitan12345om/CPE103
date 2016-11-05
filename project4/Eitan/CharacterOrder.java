@@ -19,7 +19,7 @@ public class CharacterOrder extends MorseCode implements Comparable<CharacterOrd
 
    // Method as required by the interface
    public int compareTo(CharacterOrder other) {
-      this.getCharacter().compareTo(other.getCharacter());
+      return this.getCharacter().compareTo(other.getCharacter());
    }
 
 }
