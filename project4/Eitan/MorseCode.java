@@ -3,7 +3,7 @@
  * from having to type them all - see how nice I am!
  *
  * @author Hatalsky/Jones
- * @version 11/1/2016 CPE 103 Program 4
+ * @version 11/1/2016 CPE 103 Project4
  */
 public class MorseCode {
    private Character character;
