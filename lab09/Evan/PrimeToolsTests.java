@@ -36,4 +36,17 @@ public class PrimeToolsTests
       assertEquals(31, pt.nextPrime(29));
       assertEquals(179, pt.nextPrime(173));
    }
+
+   @Test(expected = NoSuchElementException.class)
+   public void test3_nextPrimeNoSuch()
+   {
+      assertEquals(12, pt.nextPrime(Integer.MAX_VALUE - 1));
+   }
+
+   @Test(expected = IllegalArgumentException.class)
+   public void test4_nextPrimeIll()
+   {
+      assertEquals(1, pt.nextPrime(0));
+      assertEquals(1, pt.nextPrime(-1));
+   }
 }

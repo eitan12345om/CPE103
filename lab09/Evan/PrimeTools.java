@@ -47,7 +47,7 @@ public class PrimeTools
       {
          throw new IllegalArgumentException();
       }
-      while(test <= Integer.MAX_VALUE)
+      while(test < Integer.MAX_VALUE)
       {
          if(isPrime(test))
          {
