@@ -9,11 +9,11 @@
 public class MorseOrder extends MorseCode implements Comparable<MorseOrder> {
 
    // Constructors
-   public CharacterOrder(MorseCode other) {
+   public MorseOrder(MorseCode other) {
       super(other);
    }
 
-   public CharacterOrder(Character character, String code) {
+   public MorseOrder(Character character, String code) {
       super(character, code);
    }
 
