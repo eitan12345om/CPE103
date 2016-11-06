@@ -9,7 +9,7 @@
 
 import java.util.*;
 
-public class MyHash<String> implements Hashable<String>
+public class MyHash implements Hashable<String>
 {
    public MyHash()
    {
@@ -18,6 +18,6 @@ public class MyHash<String> implements Hashable<String>
 
    public int hash(String s)
    {
-
+      throw new RuntimeException("todo");
    }
 }

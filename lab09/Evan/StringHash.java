@@ -9,15 +9,10 @@
 
 import java.util.*;
 
-public class StringHash<String> implements Hashable<String>
+public class StringHash implements Hashable<String>
 {
-   public StringHash()
-   {
-
-   }
-
    public int hash(String s)
    {
-
+      return s.hashCode();
    }
 }
