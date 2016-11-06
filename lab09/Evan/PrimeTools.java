@@ -11,11 +11,6 @@ import java.util.*;
 
 public class PrimeTools
 {
-   public PrimeTools()
-   {
-
-   }
-
    public static boolean isPrime(int value)
    {
       if(value <= 1)
