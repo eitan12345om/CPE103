@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * JUnit tests for PrimeTools.
  *
  * @author Eitan Simler
- * @version Project1
+ * @version Lab09
  */
 
 public class PrimeToolsTests {
