@@ -37,19 +37,20 @@ public class PrimeTools
 
    public static int nextPrime(int value)
    {
-      int test = value + 1;
-      if(value <= 1)
-      {
-         throw new IllegalArgumentException();
-      }
-      while(test < Integer.MAX_VALUE)
-      {
-         if(isPrime(test))
+   
+
+         if(value <= 1)
          {
-            return test;
+            throw new IllegalArgumentException();
          }
-         test++;
-      }
-      throw new NoSuchElementException();
+         while(value < Integer.MAX_VALUE)
+         {
+            if(isPrime(value))
+            {
+               return value;
+            }
+            value++;
+         }
+         throw new NoSuchElementException();
    }
 }

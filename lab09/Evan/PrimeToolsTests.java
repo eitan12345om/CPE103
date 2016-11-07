@@ -31,10 +31,10 @@ public class PrimeToolsTests
    @Test
    public void test2_nextPrime()
    {
-      assertEquals(7, pt.nextPrime(5));
-      assertEquals(11, pt.nextPrime(7));
-      assertEquals(31, pt.nextPrime(29));
-      assertEquals(179, pt.nextPrime(173));
+      assertEquals(7, pt.nextPrime(7));
+      assertEquals(11, pt.nextPrime(11));
+      assertEquals(31, pt.nextPrime(30));
+      assertEquals(179, pt.nextPrime(174));
    }
 
    @Test(expected = NoSuchElementException.class)

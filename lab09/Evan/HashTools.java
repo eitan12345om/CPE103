@@ -22,37 +22,95 @@ public class HashTools
       {
          tableSize = pt.nextPrime(tableSize);
       }
-      for(int i = 0; i < tableSize; i++)
+      for(int i = 0; i < list.size(); i++)
       {
-         int hash = hashable.hash(list.get(i));
-         test.add(hash);
-         if(test.size() > 1)//no point to check before this
+         int hash = Math.abs(hashable.hash(list.get(i))%tableSize);
+         
+         if(test.contains(hash))
          {
-            for (int j = 0; j < test.size()-1; j++)//test.size()-1 so it doesnt see itself
-            {
-               if(hash == test.get(j))
-               {
-                  collisions++;
-                  test.remove(j);
-               }
-            }
+            collisions++;
          }
+         test.add(hash);
       }
       return collisions;
    }
 
    public static <T> double avgCollisions(List<T> list, int tableSize, Hashable<T> hashable)
    {
-      throw new RuntimeException("Todo");
+      ArrayList<Integer> test = new ArrayList<>();//list of hashes created
+      ArrayList<Integer> colliders = new ArrayList<>(); // hashes tht had collisions
+      double collisions = 0;
+
+      if(!pt.isPrime(tableSize))
+      {
+         tableSize = pt.nextPrime(tableSize);
+      }
+      for(int i = 0; i < list.size(); i++)
+      {
+         int hash = Math.abs(hashable.hash(list.get(i))%tableSize);
+         
+         if(test.contains(hash))
+         {
+            if(!colliders.contains(hash))
+            {
+               colliders.add(hash);
+            }
+            collisions++;
+         }
+         test.add(hash);
+      }
+      return collisions/colliders.size();
    }
 
    public static <T> int maxCollisions(List<T> list, int tableSize, Hashable<T> hashable)
    {
-      throw new RuntimeException("Todo");
+      ArrayList<Integer> test = new ArrayList<>();//list of hashes created
+
+      int collisions = 0;
+      int maxCollisions = 0;
+
+      if(!pt.isPrime(tableSize))
+      {
+         tableSize = pt.nextPrime(tableSize);
+      }
+
+      int[] hashes = new int[tableSize];
+
+      for(int i = 0; i < list.size(); i++)
+      {
+         int hash = Math.abs(hashable.hash(list.get(i))%tableSize);
+      
+         if(hashes[hash] >= 0)
+         {
+            hashes[hash] += 1;
+         }
+         if(hashes[hash] > maxCollisions)
+         {
+            maxCollisions = hashes[hash];
+         }
+      }
+      return maxCollisions -1;
    }
 
    public static <T> int unUsed(List<T> list, int tableSize, Hashable<T> hashable)
    {
-      throw new RuntimeException("Todo");
+      int size = 0;
+      if(!pt.isPrime(tableSize))
+      {
+         tableSize = pt.nextPrime(tableSize);
+      }
+
+      Integer[] hashes = new Integer[tableSize];
+
+      for(int i = 0 ;i < list.size(); i++)
+      {  
+         int hash  = Math.abs(hashable.hash(list.get(i))%tableSize);
+         if(hashes[hash] == null)
+         {
+            hashes[hash] = hash;
+            size++;
+         }
+      }
+      return tableSize - size;
    }
 }

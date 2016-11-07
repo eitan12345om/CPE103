@@ -15,7 +15,7 @@ public class HashToolsTests
 {
    StringHash s = new StringHash();
    HashTools tool = new HashTools();
-
+   double delta = .00001;
    @Test
    public void test1_collisions()
    {
@@ -27,6 +27,17 @@ public class HashToolsTests
       list.add("sam");
       list.add("john");
       list.add("sam");
-      assertEquals(4, tool.collisions(list, 7, s));
+      list.add("john");
+      list.add("john");
+      list.add("john");
+      assertEquals(7, tool.collisions(list, 10, s));
+      assertEquals(2.3333333, tool.avgCollisions(list, 10, s), delta);
+      assertEquals(5, tool.maxCollisions(list, 10, s));
+   }
+
+   @Test
+   public void test2_collisions()
+   {
+   
    }
 }
