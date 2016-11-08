@@ -107,9 +107,8 @@ public class PrimeToolsTests {
       assertEquals(11, PrimeTools.nextPrime(11));      
    }
   
-   // FIXME
-   @Test (expected=NoSuchElementException.class)
+   @Test 
    public void test20_nextPrime_maxInt() {
-      PrimeTools.nextPrime(Integer.MAX_VALUE - 1);      
+      assertEquals(Integer.MAX_VALUE, PrimeTools.nextPrime(Integer.MAX_VALUE - 1));      
    }  
 }

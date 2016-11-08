@@ -23,9 +23,11 @@ public class PrimeTools {
       if (value % 2 == 0 || value % 3 == 0) {
          return false;
       }
-      
+     
+
+      int sqrtValue = (int) Math.sqrt(value);
       int i = 5;
-      while (i * i < value) {
+      while (i < sqrtValue) {
          if (value % i == 0 || value % (i + 2) == 0) {
             return false;
          }

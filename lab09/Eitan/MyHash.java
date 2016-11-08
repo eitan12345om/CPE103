@@ -21,4 +21,3 @@ public class MyHash implements Hashable<String> {
       return hash;
    } 
 }
-
