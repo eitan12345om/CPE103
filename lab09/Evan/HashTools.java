@@ -59,7 +59,7 @@ public class HashTools
          }
          test.add(hash);
       }
-      return collisions/colliders.size();
+      return ((collisions/colliders.size()) + 1);
    }
 
    public static <T> int maxCollisions(List<T> list, int tableSize, Hashable<T> hashable)
@@ -89,7 +89,7 @@ public class HashTools
             maxCollisions = hashes[hash];
          }
       }
-      return maxCollisions -1;
+      return maxCollisions;
    }
 
    public static <T> int unUsed(List<T> list, int tableSize, Hashable<T> hashable)
