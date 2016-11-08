@@ -92,7 +92,7 @@ public class HashTools
       return maxCollisions;
    }
 
-   public static <T> int unUsed(List<T> list, int tableSize, Hashable<T> hashable)
+   public static <T> int unused(List<T> list, int tableSize, Hashable<T> hashable)
    {
       int size = 0;
       if(!pt.isPrime(tableSize))

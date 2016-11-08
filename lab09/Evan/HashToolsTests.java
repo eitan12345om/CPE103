@@ -64,8 +64,8 @@ public class HashToolsTests
       assertEquals(1769.1980198019803, tool.avgCollisions(list, 100, mh),delta);
 
       //unused
-      assertEquals(0, tool.unUsed(list, 100, sh));
-      assertEquals(0, tool.unUsed(list, 100, bh));
-      assertEquals(0, tool.unUsed(list, 100, mh));
+      assertEquals(0, tool.unused(list, 100, sh));
+      assertEquals(0, tool.unused(list, 100, bh));
+      assertEquals(0, tool.unused(list, 100, mh));
    }
 }
