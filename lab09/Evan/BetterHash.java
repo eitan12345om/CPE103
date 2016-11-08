@@ -12,11 +12,6 @@ import java.lang.*;
 
 public class BetterHash implements Hashable<String>
 {
- /*  public BetterHash()
-   {
-
-   }*/
-
    public int hash(String s)
    {
       int hash = 0;
