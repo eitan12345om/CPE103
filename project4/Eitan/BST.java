@@ -321,7 +321,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
          // 0 if equal
 	 int temp = this.element.compareTo(element);
          
-         return (temp == 0) ? element : ((temp > 0) ?
+         return (temp == 0) ? this.element : ((temp > 0) ?
             left.get(element) : right.get(element));
       }
    }
