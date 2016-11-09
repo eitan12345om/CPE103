@@ -355,6 +355,63 @@ public class TextToMorseTests {
    @Test
    public void test58_internalPathLength() {
       TextToMorse txt = new TextToMorse();
-      assertEquals(528, txt.getBST().internalPathLength());
+      assertEquals(213, txt.getBST().internalPathLength());
+   }
+
+   @Test
+   public void test59_treeHeight() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(5, txt.getBST().treeHeight());
+   }
+
+   @Test
+   public void test60_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals("... --- ...", txt.translate("SOS"));
+   }
+   
+   @Test
+   public void test61_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(".... ..  .- .-.. .-.. -.--", txt.translate("HI ALLY"));
+   }
+   
+   @Test
+   public void test62_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(".... ..   .--- .- -.- . -..-.-", txt.translate("HI  JAKE@"));
+   }
+   
+   @Test
+   public void test63_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals("", txt.translate("%"));
+   }
+   
+   @Test
+   public void test64_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(".... ..  .- .-.. .-.. -.-- -.-.--", txt.translate("%HI# A*LL^Y!"));
+   }
+   
+   @Test
+   public void test65_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- " +
+         ".-. ... - ..- ...- .-- -..- -.-- --..", txt.translate("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+   }
+   
+   @Test
+   public void test66_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals("----- .---- ..--- ...-- ....- ..... -.... --... ---.. ----.",
+         txt.translate("0123456789"));
+   }
+   
+   @Test
+   public void test67_translate() {
+      TextToMorse txt = new TextToMorse();
+      assertEquals(".-.-.- --..-- ..--.. .----. -.-.-- -..-. -.--. -.--.- .-... ---... -.-.-. " +
+         "-...- .-.-. -....- ..--.- .-..-. ...-..- -..-.-", txt.translate(".,?'!/()&:;=+-_\"$@"));
    }
 }
