@@ -22,9 +22,9 @@ public class HashTools {
       int result;
 
       // Loop through each element
-      for (int i = 0; i < list.size(); i++) {
+      for (T el : list) {
          // Store result of hashing
-         result = Math.abs(hashable.hash(list.get(i)) % tableSize);
+         result = Math.abs(hashable.hash(el) % tableSize);
          // Check if array spot already "filled"
          if (!arr[result]) {
             arr[result] = true;
@@ -51,9 +51,9 @@ public class HashTools {
       int maximum = 0;
 
       // Loop through each element
-      for (int i = 0; i < list.size(); i++) {
+      for (T el : list) {
          // Store result of hashing
-         result = Math.abs(hashable.hash(list.get(i)) % tableSize);
+         result = Math.abs(hashable.hash(el) % tableSize);
          
          arr[result] += 1;
 
@@ -86,9 +86,9 @@ public class HashTools {
       int result;
 
       // Loop through each element
-      for (int i = 0; i < list.size(); i++) {
+      for (T el : list) {
          // Store result of hashing
-         result = Math.abs(hashable.hash(list.get(i)) % tableSize);
+         result = Math.abs(hashable.hash(el) % tableSize);
          // Check if array spot already "filled"
          if (!arr[result]) {
             counter--;
