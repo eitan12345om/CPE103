@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * A class for converting Morse Code into text.
@@ -19,6 +19,7 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
       arr = new ArrayList<>(MorseCode.size());
       preSorting();
       tree.toSortedList(arr);
+      tree = new BST<>();
       constructBST(0, MorseCode.size() / 2, MorseCode.size() - 1);
    }
 
@@ -28,8 +29,27 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
    }
 
    public String translate(String s) {
-      // TODO: Add method body
-      return "";
+      // Variables to help with storing
+      String result = "";
+      String newMorse;
+      
+      // Loop through characters in String
+      for (int i = 0; i < s.length(); i++) {
+         if (s.charAt(i) == ' ') {
+            result += " ";
+         }
+         else {
+            try {
+               newMorse = tree.get(new CharacterOrder(s.charAt(i), "")).getCode();
+               result += newMorse + " ";
+            }
+            catch (NoSuchElementException e) {
+            
+            }
+         }
+      }
+
+      return result.trim();
    }
 
 
