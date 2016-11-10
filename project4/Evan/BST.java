@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 
 /**
@@ -339,26 +340,48 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
    //
    private class Ticker implements Iterator<T>
    {
-      SimpleArrayStack<T> stack = new SimpleArrayStack<>();
+      SimpleArrayStack<Node> stack = new SimpleArrayStack<>();
 
       public Ticker()
       {
-              
+         pushStack(root);   
       }
 
       public boolean hasNext()
       {
-
+         return stack.size() > 0;
       }
 
-      public E next()
+      public T next()
       {
+         if(!hasNext())
+         {
+            throw new NoSuchElementException();
+         }
+         
+         Node pop = stack.pop();
+         pushStack(pop.right);
+         
 
+         return pop.element;
       }
 
       public void remove()
       {
+         throw new UnsupportedOperationException();
+      }
 
+
+      //Private method to add to the stack
+      private void pushStack(BSTNode<T> node)
+      {
+         BSTNode<T> newNode = node;
+
+         while(newNode.getClass() == Node.class)
+         {
+            stack.push((Node) newNode);
+            newNode = ((Node) newNode).left;
+         }
       }
    }
 }
