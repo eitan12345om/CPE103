@@ -8,10 +8,50 @@
 public class QuadraticSorts {
    
    public static <T extends Comparable<? super T>> void bubbleSort1(T[] arr) {
-   
+      T temp;
+      boolean swapped = true;
+
+      // Until there are no swaps
+      while (swapped) {
+         swapped = false;
+         
+         // Go through list to see if needs swapping
+         for (int i = 0; i < arr.length - 1; i++) {
+            // Check if needs swapping
+            if (arr[i].compareTo(arr[i + 1]) > 0) {
+               temp = arr[i];
+               arr[i] = arr[i + 1];
+               arr[i + 1] = temp;
+
+               swapped = true;
+            }
+         }
+      }
    }
 
    public static <T extends Comparable<? super T>> void bubbleSort2(T[] arr) {
+      T temp;
+      boolean swapped = true;
+      int n = 0;
+
+      // Until there are no swaps
+      while (swapped) {
+         swapped = false;
+         
+         // Go through list to see if needs swapping
+         for (int i = 0; i < arr.length - 1 - n; i++) {
+            // Check if needs swapping
+            if (arr[i].compareTo(arr[i + 1]) > 0) {
+               temp = arr[i];
+               arr[i] = arr[i + 1];
+               arr[i + 1] = temp;
+
+               swapped = true;
+            }
+         }
+
+         n++;
+      }
 
    }
 
