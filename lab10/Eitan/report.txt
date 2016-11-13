@@ -1,0 +1,27 @@
+Bubble Sort 1     2,500 elements     (observed):    ?ms
+                  5,000 elements     (observed):    ?ms
+                 10,000 elements     (observed):    ?ms
+                 20,000 elements     (observed):    ?ms
+                500,000 elements   (calculated):    ?ms
+              5,000,000 elements   (calculated):    ?ms
+
+Bubble Sort 2     2,500 elements     (observed):    ?ms
+                  5,000 elements     (observed):    ?ms
+                 10,000 elements     (observed):    ?ms
+                 20,000 elements     (observed):    ?ms
+                500,000 elements   (calculated):    ?ms
+              5,000,000 elements   (calculated):    ?ms
+
+Selection Sort    2,500 elements     (observed):    ?ms
+                  5,000 elements     (observed):    ?ms
+                 10,000 elements     (observed):    ?ms
+                 20,000 elements     (observed):    ?ms
+                500,000 elements   (calculated):    ?ms
+              5,000,000 elements   (calculated):    ?ms
+
+Insertion Sort    2,500 elements     (observed):    ?ms
+                  5,000 elements     (observed):    ?ms
+                 10,000 elements     (observed):    ?ms
+                 20,000 elements     (observed):    ?ms
+                500,000 elements   (calculated):    ?ms
+              5,000,000 elements   (calculated):    ?ms
