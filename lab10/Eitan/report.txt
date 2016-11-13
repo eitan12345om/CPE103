@@ -1,27 +1,37 @@
-Bubble Sort 1     2,500 elements     (observed):    ?ms
-                  5,000 elements     (observed):    ?ms
-                 10,000 elements     (observed):    ?ms
-                 20,000 elements     (observed):    ?ms
-                500,000 elements   (calculated):    ?ms
-              5,000,000 elements   (calculated):    ?ms
+                                Times:
+======================================================================
+Bubble Sort 1     2,500 elements     (observed):    66ms
+                  5,000 elements     (observed):    200ms
+                 10,000 elements     (observed):    780ms
+                 20,000 elements     (observed):    3480ms
+                500,000 elements   (calculated):    2175000ms
+              5,000,000 elements   (calculated):    217500000ms
 
-Bubble Sort 2     2,500 elements     (observed):    ?ms
-                  5,000 elements     (observed):    ?ms
-                 10,000 elements     (observed):    ?ms
-                 20,000 elements     (observed):    ?ms
-                500,000 elements   (calculated):    ?ms
-              5,000,000 elements   (calculated):    ?ms
+Bubble Sort 2     2,500 elements     (observed):    55ms
+                  5,000 elements     (observed):    150ms
+                 10,000 elements     (observed):    580ms
+                 20,000 elements     (observed):    2300ms
+                500,000 elements   (calculated):    1437500ms
+              5,000,000 elements   (calculated):    143750000ms
 
-Selection Sort    2,500 elements     (observed):    ?ms
-                  5,000 elements     (observed):    ?ms
-                 10,000 elements     (observed):    ?ms
-                 20,000 elements     (observed):    ?ms
-                500,000 elements   (calculated):    ?ms
-              5,000,000 elements   (calculated):    ?ms
+Selection Sort    2,500 elements     (observed):    65ms
+                  5,000 elements     (observed):    85ms
+                 10,000 elements     (observed):    195ms
+                 20,000 elements     (observed):    745ms
+                500,000 elements   (calculated):    465625ms
+              5,000,000 elements   (calculated):    46562500ms
 
-Insertion Sort    2,500 elements     (observed):    ?ms
-                  5,000 elements     (observed):    ?ms
-                 10,000 elements     (observed):    ?ms
-                 20,000 elements     (observed):    ?ms
-                500,000 elements   (calculated):    ?ms
-              5,000,000 elements   (calculated):    ?ms
+Insertion Sort    2,500 elements     (observed):    80ms
+                  5,000 elements     (observed):    110ms
+                 10,000 elements     (observed):    235ms
+                 20,000 elements     (observed):    825ms
+                500,000 elements   (calculated):    515625ms
+              5,000,000 elements   (calculated):    51562500ms
+======================================================================
+
+                               Analysis:
+The selection sort was fastest of all the sorts with the insertion sort coming in second.
+The second (optimized) bubble sort was in 3rd and bubble1 was in last. The optimized
+version of the bubble sort definitely creates an improvement upon the first.
+However, all of these algorithms are O(n^2), which can be seen quite clearly in the jump
+from 10000 to 20000.
