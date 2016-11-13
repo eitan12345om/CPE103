@@ -22,7 +22,7 @@ public class QuadraticSorts {
 
       // i will indicate the number of sorted elements
       for (int i = 0; i < arr.length - 1; i++) {
-         minIndex = i
+         minIndex = i;
          
          // j indicates where to look for minimum
          for (int j = i + 1; j < arr.length; j++) {
@@ -40,6 +40,22 @@ public class QuadraticSorts {
    }
 
    public static <T extends Comparable<? super T>> void insertionSort(T[] arr) {
-   
+      int prevIndex;
+      T element;
+
+      // i will be the location of the next sorted element
+      for (int i = 1; i < arr.length; i++) {
+         prevIndex = i - 1;
+         element = arr[i];
+
+         // Shift elements up
+         while (prevIndex >= 0 && element.compareTo(arr[prevIndex]) < 0) {
+            arr[prevIndex + 1] = arr[prevIndex];
+            prevIndex--;
+         }
+
+         // Insert element;
+         arr[prevIndex + 1] = element;
+      }
    }
 }
