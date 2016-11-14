@@ -13,6 +13,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
 
    // Constructor
+   @SuppressWarnings("unchecked")
    public HashTableSC(int tableSize) {
       this.tableSize = PrimeTools.nextPrime(tableSize);
       this.table = (Entry[]) new Object[this.tableSize];
@@ -57,8 +58,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    @Override
    public int tableSize() {
-      // TODO: Method body
-      return 0;    
+      return this.tableSize;    
    }
    
    // Methods as required by HashMetrics
