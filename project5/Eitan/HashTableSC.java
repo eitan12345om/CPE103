@@ -9,14 +9,13 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    // Instance variables
    private int tableSize;
-   private Entry[] table;
+   private Object[] table;
 
 
    // Constructor
-   @SuppressWarnings("unchecked")
    public HashTableSC(int tableSize) {
       this.tableSize = PrimeTools.nextPrime(tableSize);
-      this.table = (Entry[]) new Object[this.tableSize];
+      this.table = new Object[this.tableSize];
    }
 
    // Methods as required by HashTable
