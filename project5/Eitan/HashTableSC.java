@@ -10,10 +10,16 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    // Instance variables
    private int tableSize;
    private Object[] table;
-
+   private int size = 0;
 
    // Constructor
    public HashTableSC(int tableSize) {
+      // Check if tableSize is negative
+      if (tableSize < 0) {
+         throw new IllegalArgumentException();
+      }
+
+      // Make tableSize next prime
       this.tableSize = PrimeTools.nextPrime(tableSize);
       this.table = new Object[this.tableSize];
    }
@@ -33,14 +39,13 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    @Override
    public boolean isEmpty() {
-      // TODO: Method body
-      return false; 
+      return size == 0; 
    }
 
    @Override
    public double loadFactor() { 
-      // TODO: Method body
-      return 0.0;
+      // Ideally around 1 for Separate Chaining strategy
+      return size / tableSize;
    }
 
    @Override
@@ -51,13 +56,12 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    @Override
    public int size() {
-      // TODO: Method body
-      return 0; 
+      return size; 
    }
 
    @Override
    public int tableSize() {
-      return this.tableSize;    
+      return tableSize;    
    }
    
    // Methods as required by HashMetrics
