@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 
 public class HashTableSCTests {
 
+   private final double DELTA = 1e-8;
+
    @Test (expected=IllegalArgumentException.class)
    public void test_illegalTableSize1() {
       HashTableSC<Integer> table = new HashTableSC<>(-5);
@@ -67,14 +69,43 @@ public class HashTableSCTests {
    @Test
    public void test_loadFactor1_atConstruction() {
       HashTableSC<Integer> table = new HashTableSC<>(1);
-      assertEquals(0, table.loadFactor());
+      assertEquals(0, table.loadFactor(), DELTA);
    }
 
    @Test
    public void test_loadFactor2_atConstruction() {
       HashTableSC<Integer> table = new HashTableSC<>(100);
-      assertEquals(0, table.loadFactor());
+      assertEquals(0, table.loadFactor(), DELTA);
    }
    // TODO: add more loadFactor tests
 
+   @Test
+   public void test_add1() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(50);
+      assertEquals(1, table.size());
+      assertEquals(1.0 / 101, table.loadFactor(), DELTA);
+   }
+
+   @Test
+   public void test_add2() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(50);
+      assertEquals(1, table.size());
+      assertEquals(1.0 / 101, table.loadFactor(), DELTA);
+      table.add(50);
+      assertEquals(1, table.size());
+      assertEquals(1.0 / 101, table.loadFactor(), DELTA);
+   }
+   
+   @Test
+   public void test_add3() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(50);
+      assertEquals(1, table.size());
+      assertEquals(1.0 / 101, table.loadFactor(), DELTA);
+      table.add(60);
+      assertEquals(2, table.size());
+      assertEquals(2.0 / 101, table.loadFactor(), DELTA);
+   }
 }
