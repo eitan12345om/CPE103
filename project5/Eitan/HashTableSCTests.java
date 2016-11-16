@@ -108,4 +108,68 @@ public class HashTableSCTests {
       assertEquals(2, table.size());
       assertEquals(2.0 / 101, table.loadFactor(), DELTA);
    }
+   
+   @Test
+   public void test_add4() {
+      HashTableSC<Integer> table = new HashTableSC<>(10);
+      for (int i = 0; i < 10; i++) {
+         table.add(i);
+      }
+      assertEquals(10, table.size());
+      assertEquals(10.0 / 11, table.loadFactor(), DELTA);
+   }
+   
+   @Test
+   public void test_add5() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      table.add("ehllo");
+      assertEquals(2, table.size());
+      assertEquals(2.0 / 11, table.loadFactor(), DELTA);
+   }
+   
+   @Test
+   public void test_contains1() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(50);
+      assertTrue(table.contains(50));
+   }
+
+   @Test
+   public void test_contains2() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      assertTrue(table.add(50));
+      assertFalse(table.add(50));
+      assertTrue(table.contains(50));
+   }
+   
+   @Test
+   public void test_contains3() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      assertTrue(table.add(50));
+      assertTrue(table.add(60));
+      assertTrue(table.contains(50));
+      assertTrue(table.contains(60));
+   }
+   
+   @Test
+   public void test_contains4() {
+      HashTableSC<Integer> table = new HashTableSC<>(10);
+      for (int i = 0; i < 10; i++) {
+         table.add(i);
+      }
+      for (int i = 0; i < 10; i++) {
+         assertTrue(table.contains(i));
+      }
+      assertFalse(table.contains(10));
+   }
+   
+   @Test
+   public void test_contains5() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      table.add("ehllo");
+      assertTrue(table.contains("hello"));
+      assertTrue(table.contains("ehllo"));
+   }
 }
