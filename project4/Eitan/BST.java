@@ -186,7 +186,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
       public void toSortedList(List<T> list) {
          // Do nothing with emptyNodes
-	 return;
+         return;
       }
 
       public BSTNode<T> remove(T element) {
@@ -242,7 +242,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
       public boolean contains(T element) {
          // >= 1 if current node bigger than element; <= -1 if smaller. 0 if equal
-	 int temp = this.element.compareTo(element);
+         int temp = this.element.compareTo(element);
          
          return (temp == 0) ? true : ((temp > 0) ?
             left.contains(element) : right.contains(element));
@@ -250,19 +250,19 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
       public T minimum(T element) {
          // Min will always be as far left as possible
-	 return left.minimum(this.element);
+         return left.minimum(this.element);
       }
 
       public T maximum(T element) {
          // Max will always be as far right as possible
-	 return right.maximum(this.element);
+         return right.maximum(this.element);
       }
 
       public void toSortedList(List<T> list) {
          // Add everything smaller first, then current node then bigger elements
-	 left.toSortedList(list);
-	 list.add(this.element);
-	 right.toSortedList(list);
+         left.toSortedList(list);
+         list.add(this.element);
+         right.toSortedList(list);
       }
 
       public BSTNode<T> remove(T element) {
@@ -319,7 +319,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
       public T get(T element) {
          // >= 1 if current node bigger than element; <= -1 if smaller.
          // 0 if equal
-	 int temp = this.element.compareTo(element);
+         int temp = this.element.compareTo(element);
          
          return (temp == 0) ? this.element : ((temp > 0) ?
             left.get(element) : right.get(element));
