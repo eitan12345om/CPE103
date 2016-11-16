@@ -10,7 +10,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    // Instance variables
    private int tableSize;
    private Object[] table;
-   private int size = 0;
+   private int size;
 
    // Constructor
    public HashTableSC(int tableSize) {
@@ -26,9 +26,38 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    // Methods as required by HashTable
    @Override
+   @SuppressWarnings("unchecked")
    public boolean add(T element) {
-      // TODO: Method body
-      return false;
+      // Hash element, then mod by tableSize, then absolute value
+      int hash = Math.abs(element.hashCode() % tableSize);
+
+      // Get entry from table
+      Entry entry = (Entry) table[hash];
+      
+      // Check if entry is null
+      if (entry == null) {
+         table[hash] = new Entry(element);
+         size++;
+         return true;
+      }
+      else {
+         // Loop through entries in the linked list
+         while (true) {
+            // Check if entry already in linked list
+            if (entry.element.equals(element)) {
+               return false;
+            }
+            
+            // Check if next is null
+            if (entry.next == null) {
+               entry.next = new Entry(element);
+               size++;
+               return true;
+            }
+
+            entry = entry.next;
+         }
+      }     
    }
 
    @Override
@@ -45,7 +74,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    @Override
    public double loadFactor() { 
       // Ideally around 1 for Separate Chaining strategy
-      return size / tableSize;
+      return (1.0 * size) / tableSize;
    }
 
    @Override
