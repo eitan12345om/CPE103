@@ -61,9 +61,34 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    }
 
    @Override
+   @SuppressWarnings("unchecked")
    public boolean contains(T element) {
-      // TODO: Method body
-      return false; 
+      // Hash element, then mod by tableSize, then absolute value
+      int hash = Math.abs(element.hashCode() % tableSize);
+
+      // Get entry from table
+      Entry entry = (Entry) table[hash];
+      
+      // Check if entry is null
+      if (entry == null) {
+         return false;
+      }
+      else {
+         // Loop through entries in the linked list
+         while (true) {
+            // Check if entry already in linked list
+            if (entry.element.equals(element)) {
+               return true;
+            }
+            
+            // Check if next is null
+            if (entry.next == null) {
+               return true;
+            }
+
+            entry = entry.next;
+         }
+      }     
    }
 
    @Override
