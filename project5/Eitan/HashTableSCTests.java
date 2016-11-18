@@ -51,7 +51,6 @@ public class HashTableSCTests {
       HashTableSC<Integer> table = new HashTableSC<>(1);
       assertEquals(0, table.size());
    }
-   // TODO: add more size tests
 
    @Test
    public void test_isEmpty1_atConstruction() {
@@ -64,7 +63,22 @@ public class HashTableSCTests {
       HashTableSC<Integer> table = new HashTableSC<>(100);
       assertTrue(table.isEmpty());
    }
-   // TODO: add more isEmpty tests
+   
+   @Test
+   public void test_isEmpty3() {
+      HashTableSC<Integer> table = new HashTableSC<>(1);
+      table.add(13);
+      assertFalse(table.isEmpty());
+   }
+
+   @Test
+   public void test_isEmpty4() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(13);
+      table.add(13);
+      assertFalse(table.isEmpty());
+      assertEquals(1, table.size());
+   }
 
    @Test
    public void test_loadFactor1_atConstruction() {
@@ -77,7 +91,6 @@ public class HashTableSCTests {
       HashTableSC<Integer> table = new HashTableSC<>(100);
       assertEquals(0, table.loadFactor(), DELTA);
    }
-   // TODO: add more loadFactor tests
 
    @Test
    public void test_add1() {
@@ -171,5 +184,55 @@ public class HashTableSCTests {
       table.add("ehllo");
       assertTrue(table.contains("hello"));
       assertTrue(table.contains("ehllo"));
+   }
+   
+   @Test
+   public void test_remove1() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      table.add(50);
+      assertTrue(table.remove(50));
+      assertEquals(0, table.size());
+   }
+
+   @Test
+   public void test_remove2() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      assertTrue(table.add(50));
+      assertFalse(table.add(50));
+      assertTrue(table.remove(50));
+      assertEquals(0, table.size());
+   }
+   
+   @Test
+   public void test_remove3() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      assertTrue(table.add(50));
+      assertTrue(table.add(60));
+      assertTrue(table.remove(50));
+      assertTrue(table.remove(60));
+      assertEquals(0, table.size());
+   }
+   
+   @Test
+   public void test_remove4() {
+      HashTableSC<Integer> table = new HashTableSC<>(10);
+      for (int i = 0; i < 10; i++) {
+         table.add(i);
+      }
+      for (int i = 0; i < 10; i++) {
+         assertTrue(table.remove(i));
+      }
+      assertFalse(table.remove(10));
+      assertEquals(0, table.size());
+   }
+   
+   @Test
+   public void test_remove5() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      table.add("ehllo");
+      assertTrue(table.remove("hello"));
+      assertTrue(table.remove("ehllo"));
+      assertEquals(0, table.size());
    }
 }
