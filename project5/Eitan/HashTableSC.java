@@ -11,6 +11,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    private int tableSize;
    private Object[] table;
    private int size;
+   private int collisions;
 
    // Constructor
    public HashTableSC(int tableSize) {
@@ -43,6 +44,8 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
       else {
          // Loop through entries in the linked list
          while (true) {
+            collisions++;
+            
             // Check if entry already in linked list
             if (entry.element.equals(element)) {
                return false;
@@ -145,8 +148,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    // Methods as required by HashMetrics
    @Override
    public long collisions() {
-      // TODO: Method body
-      return 0;  
+      return collisions;  
    }
 
    @Override
