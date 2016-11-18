@@ -12,6 +12,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    private Object[] table;
    private int size;
    private int collisions;
+   private int maxCollisions;
 
    // Constructor
    public HashTableSC(int tableSize) {
@@ -42,12 +43,19 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
          return true;
       }
       else {
+         int numCollisions = 0;
+
          // Loop through entries in the linked list
          while (true) {
-            collisions++;
+            numCollisions++;
             
             // Check if entry already in linked list
             if (entry.element.equals(element)) {
+               // Increment collisions and maxCollisions (if necessary)
+               collisions += numCollisions;
+               if (maxCollisions < numCollisions) {
+                  maxCollisions = numCollisions;
+               }
                return false;
             }
             
@@ -55,6 +63,12 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
             if (entry.next == null) {
                entry.next = new Entry(element);
                size++;
+               
+               // Increment collisions and maxCollisions (if necessary)
+               collisions += numCollisions;
+               if (maxCollisions < numCollisions) {
+                  maxCollisions = numCollisions;
+               }
                return true;
             }
 
@@ -153,8 +167,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
 
    @Override
    public int maxCollisions() {
-      // TODO: Method body
-      return 0;  
+      return maxCollisions;  
    }
 
    // Private inner class to represent an entry
