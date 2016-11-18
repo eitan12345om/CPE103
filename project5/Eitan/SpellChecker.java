@@ -69,27 +69,69 @@ public class SpellChecker {
    
    public HashMap<String, SpellChecker.MyStats> processFile(String fileName)
       throws FileNotFoundException {
-      // TODO: Add method body
-      return null;
+      // Create hashmap
+      HashMap<String, MyStats> hMap = new HashMap<>(267119);
+
+      Scanner scan = new Scanner(new File(fileName));
+      Scanner lineScanner;
+
+      String word;
+      MyStats value;
+      int lineNumber = 1;
+
+      while (scan.hasNext()) {
+
+         lineScanner = new Scanner(scan.nextLine());
+         lineScanner.useDelimiter("[^\\w-']+");
+
+         while (lineScanner.hasNext()) {
+            word = lineScanner.next();
+            value = hMap.get(word);
+            if (value != null) {
+               value.getLineNumbers().add(lineNumber);
+               hMap.put(word, new MyStats(value.getOccurrences() + 1,
+                        value.getLineNumbers(), value.isWord()));
+            }
+            else {
+               List<Integer> list = new ArrayList<>();
+               list.add(lineNumber);
+               hMap.put(word, new MyStats(1, list, isWord(word)));
+            }
+         }
+         lineNumber++;
+      }
+
+      scan.close();
+
+      return hMap;
    }
 
    // Inner Class
    public class MyStats {
-   
+  
+      // Instance Variables
+      private int occurrences;
+      private List<Integer> lineNumbers;
+      private boolean isWord;
+
+      // Constructor
+      public MyStats(int occurrences, List<Integer> lineNumbers, boolean isWord) {
+         this.occurrences = occurrences;
+         this.lineNumbers = lineNumbers;
+         this.isWord = isWord;
+      }
+
       // Methods
       public int getOccurrences() {
-         // TODO: Add method body
-         return 0;
+         return occurrences;
       }
       
       public List<Integer> getLineNumbers() {
-         // TODO: Add method body
-         return null;
+         return lineNumbers;
       }
       
       public boolean isWord() {
-         // TODO: Add method body
-         return false;
+         return isWord;
       }
    }
 }
