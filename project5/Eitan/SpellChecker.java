@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * A spellschecker using custom hash table.
@@ -10,24 +10,61 @@ import java.util.HashMap;
 
 public class SpellChecker {
 
+   // Instance variables
+   private HashTableSC<String> table;
+
    // Constructors
    public SpellChecker() throws FileNotFoundException {
-      // TODO: Add constuctor body   
+      Scanner scan;
+      
+      // Try to open dictionary.txt
+      try {
+         File file = new File("dictionary.txt");
+         scan = new Scanner(file);
+      }
+      catch (FileNotFoundException e) {
+         throw e;
+      }
+
+      table = new HashTableSC<>(267119);
+
+      // Add words to hashmap
+      while (scan.hasNext()) {
+         table.add(scan.nextLine());   
+      }
+
+      scan.close();
    }
 
    public SpellChecker(String fileName) throws FileNotFoundException {
-      // TODO: Add constuctor body   
+      Scanner scan;
+      
+      // Try to open dictionary.txt
+      try {
+         File file = new File(fileName);
+         scan = new Scanner(file);
+      }
+      catch (FileNotFoundException e) {
+         throw e;
+      }
+      
+      table = new HashTableSC<>(267119);
+
+      // Add words to hashmap
+      while (scan.hasNext()) {
+         table.add(scan.nextLine());   
+      }
+      
+      scan.close();
    }
 
    // Methods
    public boolean isWord(String s) {
-      // TODO: Add method body
-      return false;
+      return table.contains(s) || table.contains(s.toLowerCase());
    }
 
    public HashTableSC<String> getDictionary() {
-      // TODO: Add method body
-      return null; 
+      return table; 
    }
    
    public HashMap<String, SpellChecker.MyStats> processFile(String fileName)
