@@ -69,26 +69,19 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
       // Get entry from table
       Entry entry = (Entry) table[hash];
       
-      // Check if entry is null
-      if (entry == null) {
-         return false;
-      }
-      else {
+      // Check if entry is not null
+      if (entry != null) {
          // Loop through entries in the linked list
-         while (true) {
+         while (entry != null) {
             // Check if entry already in linked list
             if (entry.element.equals(element)) {
                return true;
             }
-            
-            // Check if next is null
-            if (entry.next == null) {
-               return true;
-            }
-
             entry = entry.next;
          }
-      }     
+      }   
+
+      return false;
    }
 
    @Override
@@ -103,9 +96,40 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
    }
 
    @Override
+   @SuppressWarnings("unchecked")
    public boolean remove(T element) {
-      // TODO: Method body
-      return false; 
+      // Hash element, then mod by tableSize, then absolute value
+      int hash = Math.abs(element.hashCode() % tableSize);
+
+      // Get entry from table
+      Entry entry = (Entry) table[hash];
+      
+      // Check if entry is null
+      if (entry == null) {
+         return false;
+      }
+      // Check if current element in specified element
+      if (entry.element.equals(element)) {
+         entry.next = entry.next == null ? null : entry.next.next;
+         size--;
+         return true;
+      }
+
+      else {
+         // Loop through entries in the linked list
+         while (entry.next != null) {
+            // Check if entry in linked list
+            if (entry.next.element.equals(element)) {
+               entry.next = entry.next == null ? null : entry.next.next;
+               size--; 
+               return true;
+            }
+            
+            entry = entry.next;
+         }
+
+         return false;
+      }     
    }
 
    @Override
