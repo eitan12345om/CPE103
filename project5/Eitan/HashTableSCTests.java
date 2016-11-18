@@ -278,4 +278,67 @@ public class HashTableSCTests {
       table.add("ehlol");
       assertEquals(4, table.collisions());
    }
+   
+   @Test
+   public void test_maxCollisions1() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      assertEquals(0, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions2() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      table.add("hello");
+      assertEquals(1, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions3() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("ehlol");
+      assertEquals(1, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions4() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("ehlol");
+      assertEquals(1, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions5() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("heoll");
+      table.add("ehlol");
+      assertEquals(2, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions6() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("a");
+      table.add("b");
+      table.add("c");
+      table.add("d");
+      assertEquals(0, table.maxCollisions());
+   }
+   
+   @Test
+   public void test_maxCollisions7() {
+      HashTableSC<String> table = new HashTableSC<>(1);
+      table.add("a");
+      table.add("b");
+      table.add("c");
+      table.add("d");
+      assertEquals(1, table.maxCollisions());
+   }
 }
