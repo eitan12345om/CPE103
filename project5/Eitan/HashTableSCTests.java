@@ -235,4 +235,47 @@ public class HashTableSCTests {
       assertTrue(table.remove("ehllo"));
       assertEquals(0, table.size());
    }
+   
+   @Test
+   public void test_collisions1() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      assertEquals(0, table.collisions());
+   }
+   
+   @Test
+   public void test_collisions2() {
+      HashTableSC<String> table = new HashTableSC<>(10);
+      table.add("hello");
+      table.add("hello");
+      assertEquals(1, table.collisions());
+   }
+   
+   @Test
+   public void test_collisions3() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("ehlol");
+      assertEquals(2, table.collisions());
+   }
+   
+   @Test
+   public void test_collisions4() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("ehlol");
+      assertEquals(2, table.collisions());
+   }
+   
+   @Test
+   public void test_collisions5() {
+      HashTableSC<String> table = new HashTableSC<>(2);
+      table.add("hello");
+      table.add("hello");
+      table.add("heoll");
+      table.add("ehlol");
+      assertEquals(4, table.collisions());
+   }
 }
