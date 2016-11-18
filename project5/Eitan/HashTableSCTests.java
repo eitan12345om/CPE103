@@ -142,6 +142,25 @@ public class HashTableSCTests {
    }
    
    @Test
+   public void test_add6() {
+      HashTableSC<Integer> table = new HashTableSC<>(100);
+      long tm = System.currentTimeMillis();
+      for (int i = 0; i < 1000; i++) {
+         table.add(i);
+      }
+      long total = System.currentTimeMillis() - tm;
+      
+      HashTableSC<Integer> table2 = new HashTableSC<>(100);
+      long tm2 = System.currentTimeMillis();
+      for (int i = 0; i < 10000; i++) {
+         table2.add(i);
+      }
+      long total2 = System.currentTimeMillis() - tm2;
+
+      assertTrue(total2 > total);
+   }
+   
+   @Test
    public void test_contains1() {
       HashTableSC<Integer> table = new HashTableSC<>(100);
       table.add(50);
