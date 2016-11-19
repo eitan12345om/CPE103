@@ -125,9 +125,9 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
       if (entry == null) {
          return false;
       }
-      // Check if current element in specified element
+      // Check if current element is specified element
       if (entry.element.equals(element)) {
-         entry.next = entry.next == null ? null : entry.next.next;
+         table[hash] = entry.next;
          size--;
          return true;
       }
@@ -137,7 +137,7 @@ public class HashTableSC<T> implements HashTable<T>, HashMetrics {
          while (entry.next != null) {
             // Check if entry in linked list
             if (entry.next.element.equals(element)) {
-               entry.next = entry.next == null ? null : entry.next.next;
+               entry.next = entry.next.next;
                size--; 
                return true;
             }
