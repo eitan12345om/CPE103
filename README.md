@@ -1,8 +1,8 @@
-# CPE103
+# Look Here
 
 Working like normal progammers here
 
-Project and lab directories are split into each student/person for ease of access
+Project and lab directories are split into each person for ease of access
 
 So commits and pushes dont get ugly:
 
