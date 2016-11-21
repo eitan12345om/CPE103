@@ -25,12 +25,15 @@ public class PrimeTools
       {
          return false;
       }
-      for(int i = 5; (i*i) <= value; i+=6)
+      int sqrtValue = (int)Math.sqrt(value);
+      int i = 5;
+      while(i <= sqrtValue)
       {
          if(value%i == 0 || value%(i + 2) == 0)
          {
             return false;
          }
+         i += 6;
       }
       return true;
    }
@@ -39,11 +42,11 @@ public class PrimeTools
    {
    
 
-         if(value <= 1)
+         if(value < 0)
          {
             throw new IllegalArgumentException();
          }
-         while(value < Integer.MAX_VALUE)
+         while(value <= Integer.MAX_VALUE)
          {
             if(isPrime(value))
             {
