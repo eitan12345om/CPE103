@@ -8,19 +8,20 @@
 public class ShellSorts {
 
    public static <T extends Comparable<? super T>> void shell(T[] array) {
-      // TODO: Method body
+      shellSort(array, new int[] {128, 64, 32, 16, 8, 4, 2, 1});
    }
    
    public static <T extends Comparable<? super T>> void hibbard(T[] array) {
-      // TODO: Method body
+      shellSort(array, new int[] {255, 127, 63, 31, 15, 7, 3, 1});
    }
    
    public static <T extends Comparable<? super T>> void sedgewick(T[] array) {
-      // TODO: Method body
+      shellSort(array, new int[] {16577, 4193, 1073, 281, 77, 23, 8, 1});
    }
    
    public static <T extends Comparable<? super T>> void heapSort(T[] array) {
-      // TODO: Method body
+      PriorityQueue<T> pq = new PriorityQueue<>();
+      pq.sort(array, array.length);
    }
 
    private static <T extends Comparable<? super T>> void shellSort(T[] array,
