@@ -1,42 +1,45 @@
-Insertion Sort       2,500 elements     (observed):    ?ms
-                     5,000 elements     (observed):    ?ms
-                    10,000 elements     (observed):    ?ms
-                    20,000 elements     (observed):    ?ms
-                   500,000 elements   (calculated):    ?ms
-                 5,000,000 elements   (calculated):    ?ms
+                           Times:
+=================================================================
+Insertion Sort       2,500 elements     (observed):          80ms
+                     5,000 elements     (observed):         110ms
+                    10,000 elements     (observed):         235ms
+                    20,000 elements     (observed):         825ms
+                   500,000 elements   (calculated):      515625ms
+                 5,000,000 elements   (calculated):    51562500ms
 
-Shell Variation      2,500 elements     (observed):    ?ms
-                     5,000 elements     (observed):    ?ms
-                    10,000 elements     (observed):    ?ms
-                    20,000 elements     (observed):    ?ms
-                   500,000 elements     (observed):    ?ms
-                 1,000,000 elements     (observed):    ?ms
-                 5,000,000 elements   (calculated):    ?ms
-                25,000,000 elements   (calculated):    ?ms
+Shell Variation      2,500 elements     (observed):          20ms
+                     5,000 elements     (observed):          40ms
+                    10,000 elements     (observed):          70ms
+                    20,000 elements     (observed):         100ms
+                   500,000 elements     (observed):       16000ms
+                 1,000,000 elements     (observed):       76000ms
+                 5,000,000 elements   (calculated):     1900000ms
+                25,000,000 elements   (calculated):    47500000ms
 
-Hibbard Variation    2,500 elements     (observed):    ?ms
-                     5,000 elements     (observed):    ?ms
-                    10,000 elements     (observed):    ?ms
-                    20,000 elements     (observed):    ?ms
-                   500,000 elements     (observed):    ?ms
-                 1,000,000 elements     (observed):    ?ms
-                 5,000,000 elements   (calculated):    ?ms
-                25,000,000 elements   (calculated):    ?ms
+Hibbard Variation    2,500 elements     (observed):          15ms
+                     5,000 elements     (observed):          25ms
+                    10,000 elements     (observed):          40ms
+                    20,000 elements     (observed):          80ms
+                   500,000 elements     (observed):        6250ms
+                 1,000,000 elements     (observed):       40000ms
+                 5,000,000 elements   (calculated):      447214ms
+                25,000,000 elements   (calculated):     5000000ms
 
-Sedgewick Variation  2,500 elements     (observed):    ?ms
-                     5,000 elements     (observed):    ?ms
-                    10,000 elements     (observed):    ?ms
-                    20,000 elements     (observed):    ?ms
-                   500,000 elements     (observed):    ?ms
-                 1,000,000 elements     (observed):    ?ms
-                 5,000,000 elements   (calculated):    ?ms
-                25,000,000 elements   (calculated):    ?ms
+Sedgewick Variation  2,500 elements     (observed):          12ms
+                     5,000 elements     (observed):          17ms
+                    10,000 elements     (observed):          36ms
+                    20,000 elements     (observed):          75ms
+                   500,000 elements     (observed):         500ms
+                 1,000,000 elements     (observed):        1300ms
+                 5,000,000 elements   (calculated):       11115ms
+                25,000,000 elements   (calculated):       95031ms
 
-Heap Sort            2,500 elements     (observed):    ?ms
-                     5,000 elements     (observed):    ?ms
-                    10,000 elements     (observed):    ?ms
-                    20,000 elements     (observed):    ?ms
-                   500,000 elements     (observed):    ?ms
-                 1,000,000 elements     (observed):    ?ms
-                 5,000,000 elements   (calculated):    ?ms
-                25,000,000 elements   (calculated):    ?ms
+Heap Sort            2,500 elements     (observed):          30ms
+                     5,000 elements     (observed):          65ms
+                    10,000 elements     (observed):          45ms
+                    20,000 elements     (observed):          90ms
+                   500,000 elements     (observed):         500ms
+                 1,000,000 elements     (observed):        1050ms
+                 5,000,000 elements   (calculated):        5862ms
+                25,000,000 elements   (calculated):       32366ms
+=================================================================
