@@ -2,9 +2,9 @@
  * Provided starting point for Java-based tsort.
  *
  * @author Hatalsky/Jones - Starting point.
- * @author ? - Completed by.
+ * @author Eitan Simler
  *
- * @version CPE 103 Lab 12
+ * @version Lab12
  */
 import java.io.*;
 import java.util.*;
@@ -35,7 +35,46 @@ public class TSort {
     * </ul>
     */
    public static String tsort(String edges) {
+      Scanner scan = new Scanner(edges);
+      ArrayList<Vertex> vertices = new ArrayList<>();
+      Stack<Vertex> stack = new Stack<>();
+      
+      // Check if edges is empty string
+      if (!scan.hasNext()) {
+         throw new IllegalArgumentException("input contains no edges");
+      }
+
+      // Add all vertices 
+      String vertex;
+      String adjacent;
+      while (scan.hasNext()) {
+         vertex = scan.next();
+         
+         // See if there is adjacent
+         try {
+            adjacent = scan.next();
+         }
+         // No adjacent means odd number for edges. Exception thrown
+         catch (NoSuchElementException e) {
+            throw new IllegalArgumentException("input contains an odd number of tokens");
+         }
+
+
+      }
+
+      scan.close();
       return "TODO by you!";
+   }
+
+   private class Vertex {
+   
+      // Instance variables
+      private int inDegree;
+      private ArrayList<String> adjacents = new ArrayList<>();
+
+      // Constructor
+      public Vertex() {
+      }
    }
 
    /**
