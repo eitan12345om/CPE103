@@ -13,14 +13,12 @@ public class Huffman {
    }
 
    // Methods
-   public String decode(String encoded) {
+   public void compress(String infileName, String outfileName) {
       // TODO: Add method body
-      return ""; 
    }
 
-   public String encode(String text) {
+   public void decompress(String infileName, String outfileName) {
       // TODO: Add method body
-      return "";  
    }
 
    public String toString() {
