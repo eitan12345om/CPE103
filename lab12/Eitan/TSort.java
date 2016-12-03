@@ -37,7 +37,6 @@ public class TSort {
    public static String tsort(String edges) {
       Scanner scan = new Scanner(edges);
       ArrayList<Vertex> vertices = new ArrayList<>();
-      Stack<Vertex> stack = new Stack<>();
       
       // Check if edges is empty string
       if (!scan.hasNext()) {
@@ -47,6 +46,7 @@ public class TSort {
       // Add all vertices 
       String vertex;
       String adjacent;
+      // Loop through files
       while (scan.hasNext()) {
          vertex = scan.next();
          
@@ -58,22 +58,89 @@ public class TSort {
          catch (NoSuchElementException e) {
             throw new IllegalArgumentException("input contains an odd number of tokens");
          }
-
-
+         
+         // Puts vertex in list if not already there
+         putVertexInList(vertex, vertices, adjacent);
       }
 
       scan.close();
-      return "TODO by you!";
+      
+      Stack<Vertex> stack = new Stack<>();
+
+      // Push vertices with inDegree 0 to stack
+      for (Vertex v : vertices) {
+         if (v.inDegree == 0) {
+            stack.push(v);
+         }
+      }
+
+      StringBuilder theString = new StringBuilder();
+
+      while (!stack.empty()) {
+         Vertex v = stack.pop();
+         vertices.remove(v);
+         theString.append(v.name + "\n");
+
+         // Reduce inDegree for each adjacent
+         for (Vertex adj : v.adjacents) {
+            adj.inDegree--;
+            // Add vertices with inDegree of 0           
+            if (adj.inDegree == 0) {
+               stack.push(adj);
+            }
+         }
+      }
+
+      // Check if graph contains a cycle
+      if (vertices.size() != 0) {
+         throw new IllegalArgumentException("input contains a loop");
+      }
+
+      return theString.toString();
    }
 
-   private class Vertex {
+   private static void putVertexInList(String v, ArrayList<Vertex> vertices, String adjacent) {
+      // Loop through the vertices list
+      for (Vertex vert : vertices) {
+         // Check if vertex in vertices list
+         if (v.equals(vert.name)) {
+            // Create new adjacent if doesn't already exist
+            vert.adjacents.add(adjacentInList(adjacent, vertices));
+            return;
+         }
+      }
+      // Vertex not in list
+      Vertex newVert = new Vertex(v);
+      newVert.adjacents.add(adjacentInList(adjacent, vertices));
+      vertices.add(newVert);
+   }
+
+   private static Vertex adjacentInList(String adjacent, ArrayList<Vertex> vertices) {
+      // Loop through vertices
+      for (Vertex vert : vertices) {
+         // Check if adjacent in vertices list
+         if (adjacent.equals(vert.name)) {
+            vert.inDegree++;
+            return vert;
+         }
+      }
+      // Create new vertex and increment indegree;
+      Vertex newVert = new Vertex(adjacent);
+      newVert.inDegree++;
+      vertices.add(newVert);
+      return newVert;
+   }
+
+   private static class Vertex {
    
       // Instance variables
       private int inDegree;
-      private ArrayList<String> adjacents = new ArrayList<>();
+      private ArrayList<Vertex> adjacents = new ArrayList<>();
+      private String name;
 
       // Constructor
-      public Vertex() {
+      public Vertex(String name) {
+         this.name = name;
       }
    }
 
@@ -108,9 +175,9 @@ public class TSort {
       scanner.close();
 
       try {
-         System.out.println(tsort(input.toString()));
+         System.out.print(tsort(input.toString()));
       } catch(IllegalArgumentException e) {
-         System.out.print("TSort: " + e.getMessage());
+         System.out.println("TSort: " + e.getMessage());
          System.exit(1);
       }
    }
