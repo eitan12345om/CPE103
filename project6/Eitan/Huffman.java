@@ -10,9 +10,16 @@ import java.io.*;
 
 public class Huffman {
 
+   // Instance variable
+   private PriorityQueue<Node> pq = new PriorityQueue<>();
+
    // Constructor
    public Huffman(String fileName) throws FileNotFoundException, IOException {
+      // File reader
+      BufferedReader in = new BufferedReader(new FileReader(fileName));
    
+      // Fill PriorityQueue
+      extractToArrayList(in);
    }
 
    // Methods
@@ -29,6 +36,33 @@ public class Huffman {
       return "";
    }
 
+   private void extractToArrayList(BufferedReader in) throws IOException {
+      ArrayList<Node> list = new ArrayList<>();
+      
+      int c;
+      // Go through file one character at a time
+      while ((c = in.read()) != 1) {
+         char ch = (char) c;
+         
+         int index = list.indexOf(new Node(ch));
+         // Returns index at which Node is stored or -1 if not found
+         if (index == -1) {
+            list.add(new Node(ch));
+         }
+         else {
+            list.get(index).frequency++;
+         }
+      }
+
+      fillPriorityQueue(list);
+   }
+
+   private void fillPriorityQueue(ArrayList<Node> list) {
+      for (Node node : list) {
+         pq.add(node);
+      }
+   }
+
    // Private class to represent node
    private class Node implements Comparable<Node> {
    
@@ -39,6 +73,7 @@ public class Huffman {
       // Constructor
       public Node(Character value) {
          this.value = value;
+         this.frequency = 1;
       }
 
       // Compare the values of the nodes
@@ -52,6 +87,17 @@ public class Huffman {
          }
 
          return result;
+      }
+
+      // Determine if two nodes are equal by value
+      @Override
+      public boolean equals(Object other) {
+         if (other == null) {
+            return false;
+         }
+
+         Node o = (Node) other;
+         return value.equals(o.value);
       }
    }
 }
