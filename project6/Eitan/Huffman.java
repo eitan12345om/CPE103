@@ -20,6 +20,8 @@ public class Huffman {
    
       // Fill PriorityQueue
       extractToArrayList(in);
+
+      in.close();
    }
 
    // Methods
@@ -41,7 +43,12 @@ public class Huffman {
       
       int c;
       // Go through file one character at a time
-      while ((c = in.read()) != 1) {
+      while ((c = in.read()) != -1) {
+         // Check if reached end of file
+         if (c == -1) {
+            break;
+         }
+         
          char ch = (char) c;
          
          int index = list.indexOf(new Node(ch));
@@ -53,13 +60,24 @@ public class Huffman {
             list.get(index).frequency++;
          }
       }
-
+     
       fillPriorityQueue(list);
    }
 
    private void fillPriorityQueue(ArrayList<Node> list) {
       for (Node node : list) {
          pq.add(node);
+      }
+   }
+
+   // For testing
+   public void printPQ() {
+      System.out.println("\nPQ size: " + pq.size());
+      Node node;
+      while (pq.size() != 0) {
+         node = pq.peek();
+         System.out.println("Value: " + node.value + ", frequency: " + node.frequency);
+         pq.remove(node);
       }
    }
 
@@ -85,7 +103,7 @@ public class Huffman {
          if (result == 0) {
             return value.compareTo(other.value);
          }
-
+         
          return result;
       }
 
