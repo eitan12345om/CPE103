@@ -44,7 +44,14 @@ public class Huffman {
       // Compare the values of the nodes
       @Override
       public int compareTo(Node other) {
-         return 
+         int result = frequency - other.frequency;
+
+         // Check if the frequencies are the same. Sort by ASCII.
+         if (result == 0) {
+            return value.compareTo(other.value);
+         }
+
+         return result;
       }
    }
 }
