@@ -39,11 +39,10 @@ public class Huffman {
 
       int c;
       Node node = pq.peek();
-      Character ch;
       // Go through file one character at a time
       while ((c = in.read()) != -1) {
          // Check if go left or right
-         if (c == 0) {
+         if ((char) c == '0') {
             node = node.left;
          }
          else {
@@ -63,8 +62,11 @@ public class Huffman {
    }
 
    public String toString() {
-      // TODO: Add method body
-      return "";
+      StringBuilder sb = new StringBuilder();
+      sb.append("|");
+      toString(pq.peek(), sb);
+      sb.append("|");     
+      return sb.toString();
    }
 
    private void extractToHashMap(BufferedReader in) throws IOException {
@@ -108,6 +110,17 @@ public class Huffman {
          // Create new internal node
          pq.add(new Node(node1.frequency + node2.frequency, node1, node2));
       } 
+   }
+
+   private void toString(Node node, StringBuilder sb) {
+      // Recursive method to to print pre-order of tree
+      if (node.value == null) {
+         toString(node.left, sb);
+         toString(node.right, sb); 
+      }
+      else {
+         sb.append(node.value);
+      }
    }
 
    // Private class to represent node
