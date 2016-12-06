@@ -12,6 +12,7 @@ public class Huffman {
 
    // Instance variable
    private PriorityQueue<Node> pq = new PriorityQueue<>();
+   private HashMap<Integer, String> map = new HashMap<>();
 
    // Constructor
    public Huffman(String fileName) throws FileNotFoundException, IOException {
@@ -24,12 +25,28 @@ public class Huffman {
 
       // Create PriorityQueue with tree
       makeTree();
+
+      // Generate codes for compress
+      makeCodes(pq.peek(), ""); 
    }
 
    // Methods
    public void compress(String infileName, String outfileName) throws
       FileNotFoundException, IOException {
-      // TODO: Add method body
+      BufferedReader in = new BufferedReader(new FileReader(infileName));
+      BufferedWriter out = new BufferedWriter(new FileWriter(outfileName));
+
+      int c;
+      String value;
+      // Go through file one character at a time
+      while ((c = in.read()) != -1) {
+         // Get object at value
+         value = map.get(c);
+         out.write(value, 0, value.length());
+      }
+
+      in.close();
+      out.close();
    }
 
    public void decompress(String infileName, String outfileName) throws
@@ -110,6 +127,16 @@ public class Huffman {
          // Create new internal node
          pq.add(new Node(node1.frequency + node2.frequency, node1, node2));
       } 
+   }
+
+   private void makeCodes(Node node, String code) {
+      if (node.value != null) {
+         map.put((int) node.value, code.toString());
+      }
+      else {
+         makeCodes(node.left, new String(code + "0"));
+         makeCodes(node.right, new String(code + "1"));
+      }
    }
 
    private void toString(Node node, StringBuilder sb) {
