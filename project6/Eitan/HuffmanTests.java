@@ -18,12 +18,26 @@ public class HuffmanTests {
    }
 
    @Test
-   public void test_ArrayList() throws FileNotFoundException, IOException {
+   public void test_toString() throws FileNotFoundException, IOException {
       Huffman huff = new Huffman("textfile.txt");
+      assertEquals("|acb|", huff.toString());
    }
    
    @Test
-   public void test_ArrayList2() throws FileNotFoundException, IOException {
+   public void test_toString2() throws FileNotFoundException, IOException {
       Huffman huff = new Huffman("textfile2.txt");
+      assertEquals("| bdca|", huff.toString());
+   }
+
+   @Test
+   public void test_decompress() throws FileNotFoundException, IOException {
+      Huffman huff = new Huffman("textfile.txt");
+      huff.decompress("compressed.txt", "decompressed.txt");
+   }
+
+   @Test
+   public void test_decompress2() throws FileNotFoundException, IOException {
+      Huffman huff = new Huffman("textfile2.txt");
+      huff.decompress("compressed2.txt", "decompressed2.txt");
    }
 }
