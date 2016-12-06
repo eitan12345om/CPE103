@@ -27,12 +27,39 @@ public class Huffman {
    }
 
    // Methods
-   public void compress(String infileName, String outfileName) {
+   public void compress(String infileName, String outfileName) throws
+      FileNotFoundException, IOException {
       // TODO: Add method body
    }
 
-   public void decompress(String infileName, String outfileName) {
-      // TODO: Add method body
+   public void decompress(String infileName, String outfileName) throws
+      FileNotFoundException, IOException {
+      BufferedReader in = new BufferedReader(new FileReader(infileName));
+      BufferedWriter out = new BufferedWriter(new FileWriter(outfileName));
+
+      int c;
+      Node node = pq.peek();
+      Character ch;
+      // Go through file one character at a time
+      while ((c = in.read()) != -1) {
+         // Check if go left or right
+         if (c == 0) {
+            node = node.left;
+         }
+         else {
+            node = node.right;
+         }
+
+         // Check if at leaf node
+         if (node.value != null) {
+            out.write((int) node.value);
+            // reset node
+            node = pq.peek(); 
+         }
+      }
+
+      in.close();
+      out.close();
    }
 
    public String toString() {
@@ -45,9 +72,10 @@ public class Huffman {
         
       int c;
       Node node;
+      Character ch;
       // Go through file one character at a time
       while ((c = in.read()) != -1) {
-         Character ch = (char) c;
+         ch = (char) c;
          
          node = hMap.get(ch);
          
