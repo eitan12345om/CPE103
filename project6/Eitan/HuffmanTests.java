@@ -40,4 +40,16 @@ public class HuffmanTests {
       Huffman huff = new Huffman("textfile2.txt");
       huff.decompress("compressed2.txt", "decompressed2.txt");
    }
+   
+   //@Test
+   //public void test_compress() throws FileNotFoundException, IOException {
+   //   Huffman huff = new Huffman("textfile.txt");
+   //   huff.compress("textfile.txt", "textfile_compressed.txt");
+   //}
+
+   @Test
+   public void test_compress2() throws FileNotFoundException, IOException {
+      Huffman huff = new Huffman("textfile2.txt");
+      huff.compress("textfile2.txt", "textfile_compressed2.txt");
+   }
 }
