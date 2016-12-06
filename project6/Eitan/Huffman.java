@@ -18,10 +18,12 @@ public class Huffman {
       // File reader
       BufferedReader in = new BufferedReader(new FileReader(fileName));
    
-      // Fill PriorityQueue
-      extractToArrayList(in);
-
+      // Extract to HashMap then fill PriorityQueue
+      extractToHashMap(in);
       in.close();
+
+      // Create PriorityQueue with tree
+      makeTree();
    }
 
    // Methods
@@ -38,47 +40,46 @@ public class Huffman {
       return "";
    }
 
-   private void extractToArrayList(BufferedReader in) throws IOException {
-      ArrayList<Node> list = new ArrayList<>();
-      
+   private void extractToHashMap(BufferedReader in) throws IOException {
+      HashMap<Character, Node> hMap = new HashMap<>();
+        
       int c;
+      Node node;
       // Go through file one character at a time
       while ((c = in.read()) != -1) {
-         // Check if reached end of file
-         if (c == -1) {
-            break;
-         }
+         Character ch = (char) c;
          
-         char ch = (char) c;
+         node = hMap.get(ch);
          
-         int index = list.indexOf(new Node(ch));
-         // Returns index at which Node is stored or -1 if not found
-         if (index == -1) {
-            list.add(new Node(ch));
+         if (node == null) {
+            hMap.put(ch, new Node(ch));
          }
          else {
-            list.get(index).frequency++;
+            node.frequency++;
          }
       }
      
-      fillPriorityQueue(list);
+      fillPriorityQueue(hMap);
    }
 
-   private void fillPriorityQueue(ArrayList<Node> list) {
-      for (Node node : list) {
+   private void fillPriorityQueue(HashMap<Character, Node> hMap) {
+      for (Node node : hMap.values()) {
          pq.add(node);
       }
    }
 
-   // For testing
-   public void printPQ() {
-      System.out.println("\nPQ size: " + pq.size());
-      Node node;
-      while (pq.size() != 0) {
-         node = pq.peek();
-         System.out.println("Value: " + node.value + ", frequency: " + node.frequency);
-         pq.remove(node);
-      }
+   private void makeTree() {
+      Node node1, node2;
+      while (pq.size() > 1) {
+         // Assign node1 and node2 and remove from pq
+         node1 = pq.peek();
+         pq.remove(node1);
+         node2 = pq.peek();
+         pq.remove(node2);
+
+         // Create new internal node
+         pq.add(new Node(node1.frequency + node2.frequency, node1, node2));
+      } 
    }
 
    // Private class to represent node
@@ -87,11 +88,22 @@ public class Huffman {
       // Instance variables
       private Character value;
       private int frequency;
+      private Node right, left;
+      private Character minChar;
 
-      // Constructor
+      // Constructors
       public Node(Character value) {
          this.value = value;
+         this.minChar = value;
          this.frequency = 1;
+      }
+
+      public Node(int frequency, Node left, Node right) {
+         this.frequency = frequency;
+         this.left = left;
+         this.right = right;
+         this.minChar = left.minChar.compareTo(right.minChar) < 0 ? left.minChar
+            : right.minChar; 
       }
 
       // Compare the values of the nodes
@@ -101,21 +113,10 @@ public class Huffman {
 
          // Check if the frequencies are the same. Sort by ASCII.
          if (result == 0) {
-            return value.compareTo(other.value);
+            return minChar.compareTo(other.minChar);
          }
          
          return result;
-      }
-
-      // Determine if two nodes are equal by value
-      @Override
-      public boolean equals(Object other) {
-         if (other == null) {
-            return false;
-         }
-
-         Node o = (Node) other;
-         return value.equals(o.value);
       }
    }
 }
