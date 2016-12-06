@@ -20,12 +20,10 @@ public class HuffmanTests {
    @Test
    public void test_ArrayList() throws FileNotFoundException, IOException {
       Huffman huff = new Huffman("textfile.txt");
-      huff.printPQ();
    }
    
    @Test
    public void test_ArrayList2() throws FileNotFoundException, IOException {
       Huffman huff = new Huffman("textfile2.txt");
-      huff.printPQ();
    }
 }
