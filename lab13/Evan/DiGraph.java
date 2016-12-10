@@ -3,9 +3,10 @@
  * Dijkstra's shortest-path algorithm.
  *
  * @author Hatalsky/Jones - Provided partial solution
- * @author ? - Completed by
+ * @author Evan Jameson - Completed by
  * @version CPE 103 Lab 13
  */
+
 import java.io.*;
 import java.util.*;
 
@@ -24,6 +25,8 @@ public class DiGraph {
          this.weight = weight;
       }
    }
+
+   //===================================================================================================
 
    /* Provided/Required - should not need to modify */
    private static class Vertex implements Comparable<Vertex> {
@@ -70,6 +73,8 @@ public class DiGraph {
       }
    } // End class Vertex
 
+   //===================================================================================================
+
    /**
     * Constructs a directed graph from a file containing the weighted
     * edges.  A weighted edge is specified as three values, separated
@@ -88,8 +93,31 @@ public class DiGraph {
     *   <li>the graph contains a negative edge</li>
     * </ul>
     */
+
+	StringBuilder input = new StringBuilder();
+	String edges;
    public DiGraph(String fileName) throws FileNotFoundException {
       // TODO: Complete the constructor
+      Scanner scanner = new Scanner(new File(fileName));
+      while(scanner.hasNext())
+      {
+         String token = scanner.next();
+      	 if(Integer.parseInt(token) < 0)
+	 {
+	    throw new IllegalArgumentException("the graph contains a negative edge");
+	 }
+         input.append(token + " ");
+      }
+      if(input.length() == 0) //not sure if correct method, check javadocs
+      {
+	  throw new IllegalArgumentException("the file is empty");
+      }
+      edges = input.toString();
+      if(oddVert(edges))
+      {
+         throw new IllegalArgumentException("the input is malformed");
+      }
+      scanner.close();
    }
 
    /**
@@ -101,8 +129,18 @@ public class DiGraph {
     * @throws IllegalArgumentException if the specified vertex is not
     * in the graph
     */
-   public void setStart(String from) {
+   public void setStart(String from) 
+   {
       // TODO: Complete setStart
+
+      //Step 1: build Adjacency List
+   	
+
+      //Step 2: Initialise the vertecies in the adjacenc list to stuff
+
+      //Step 3: Set the starting vertex's distance to 0 and add it to a minimum priority queue (what does the minimum mean?)
+
+      //Step 4: Algorithm Shit
    }
 
    /**
@@ -143,4 +181,37 @@ public class DiGraph {
    public double getDistanceTo(String to) {
       return vertices.get(to).distance;
    }
+
+   //====================================================================================================
+
+   private void buildAdj(Vertex vert1, Vertex vert2)
+   {
+   	for(Edge vert: Collection.toArray(vert2.edges.values()))// edges))
+	{
+	   if(vert1.name.equals(vert.name))
+	   {
+	      throw new IllegalArgumentException("input contains a loop");
+	   }
+	}
+	vert1.edges.add(vert2);//<--how the hell do i add to a treemap...
+	//Don't think we are working with indegree in this lab
+   }
+
+   private boolean oddVert(String edges)
+   {
+      int num = 0;
+      Scanner scan = new Scanner(edges);
+      while(scan.hasNext())
+      {
+         num += 1;
+	 scan.next();
+      }
+      scan.close();
+      if(num%2 == 1)
+      {
+         return true;
+      }
+      return false;
+   }
+
 }
