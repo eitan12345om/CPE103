@@ -3,8 +3,8 @@
  * Dijkstra's shortest-path algorithm.
  *
  * @author Hatalsky/Jones - Provided partial solution
- * @author ? - Completed by
- * @version CPE 103 Lab 13
+ * @author Eitan Simler - Completed by
+ * @version Lab13
  */
 import java.io.*;
 import java.util.*;
@@ -89,7 +89,66 @@ public class DiGraph {
     * </ul>
     */
    public DiGraph(String fileName) throws FileNotFoundException {
-      // TODO: Complete the constructor
+      Scanner lineScan = new Scanner(new File(fileName));
+ 
+      // Check if file is empty
+      if (!lineScan.hasNext()) {
+         throw new IllegalArgumentException();
+      }
+      
+      Scanner edgeScan = new Scanner("");
+
+      String from, to;
+      double weight;
+      Vertex vertex;
+      
+      // Loop through file
+      while (lineScan.hasNext()) {
+         edgeScan = new Scanner(lineScan.nextLine());
+        
+         // Check if there is malformed data
+         try {
+            from = edgeScan.next();
+            to = edgeScan.next();
+            weight = edgeScan.nextDouble();
+         }
+         catch (InputMismatchException e) {
+            throw new IllegalArgumentException();
+         }
+         catch (NoSuchElementException e) {
+            throw new IllegalArgumentException();
+         }
+
+         // Check if weight is negative
+         if (weight < 0) {
+            throw new IllegalArgumentException();
+         }
+
+         // Check if vertex exists in TreeMap
+         vertex = vertices.get(from);
+         
+         if (vertex == null) {
+            vertex = new Vertex(from);
+            // Add vertex to TreeMap
+            vertices.put(vertex.toString(), vertex);
+         }
+         
+         Vertex toVertex = vertices.get(to);
+         // Check if toVertex already exists
+         if (toVertex == null) {
+            toVertex = new Vertex(to);
+         }
+
+         // Add edge to adjacents 
+         vertex.addEdge(toVertex, weight);
+      }
+
+      lineScan.close();
+      edgeScan.close();
+
+      for (Vertex v : vertices.values()) {
+         System.out.println(v.debugToString());
+      }
    }
 
    /**
@@ -102,7 +161,39 @@ public class DiGraph {
     * in the graph
     */
    public void setStart(String from) {
-      // TODO: Complete setStart
+      PriorityQueue<Vertex> pq = new PriorityQueue<>();
+      
+      // Get starting vertex
+      Vertex start = vertices.get(from);
+      
+      // Check if vertex exists
+      if (start == null) {
+         throw new IllegalArgumentException();
+      }
+
+      start.distance = 0;
+      pq.add(start);
+
+      Vertex vertex;
+      // While there are unknown vertices
+      while (pq.size() != 0) {
+         vertex = pq.poll();
+         vertex.known = true;
+
+         // For each adjacent
+         for(Edge edge : vertex.edges.values()) {
+            // If the vertex isn't already known, update distance and prior 
+            if (!edge.dest.known) {
+               // Check if current distance is more than distance from current vertex
+               if (((Double) edge.dest.distance).compareTo(edge.weight + vertex.distance) > 0) {
+                  pq.remove(edge.dest);
+                  edge.dest.distance = edge.weight + vertex.distance;
+                  pq.add(edge.dest);
+                  edge.dest.prior = vertex;
+               }
+            }
+         }         
+      } 
    }
 
    /**
